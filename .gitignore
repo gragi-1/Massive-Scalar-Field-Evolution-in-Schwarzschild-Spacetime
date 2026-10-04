@@ -1,0 +1,66 @@
+# Python environments, caches and generated files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+build/
+dist/
+
+# Local editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# LaTeX compilation files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lol
+*.lot
+*.out
+*.run.xml
+*.synctex*
+*.toc
+*.xdv
+*.dvi
+*.nav
+*.snm
+*.vrb
+_minted*/
+.minted-*/
+*.minted
+
+# Generated report PDF; PDF figures remain under version control
+/report/main.pdf
+
+# Legacy copies and examples unused by the current report
+/report/Old_GeM-UPM.cls
+/report/referencias.tex
+/report/appendices/anexo.tex
+/report/appendices/apendice.tex
+/report/logos/logo-epes.png
+/report/logos/logo-epes-dark.png
+/report/logos/logo-gem.png
+
+# Temporary or large datasets; figures and tables remain under version control
+.cache/
+tmp/
+/results/raw/
+/results/tmp/

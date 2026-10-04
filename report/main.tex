@@ -1,0 +1,176 @@
+\documentclass[nonCC,biblatex=numeric]{GeM-UPM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DATOS DEL PROYECTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Evolución de un campo escalar masivo alrededor de un agujero negro de Schwarzschild}
+
+\author{
+Alejandro Gragera Serradilla\\
+Rocío María Muñoz Guitart\\
+Yang Liu\\
+Wenyan Xu Ji
+}
+
+% Información bibliográfica de los autores
+\bibauthor{
+Gragera Serradilla, Alejandro \and
+Muñoz Guitart, Rocío María \and
+Liu, Yang \and
+Xu Ji, Wenyan
+}
+
+\tutor{Paulo Nicanor Seminario Huertas}
+
+% No se incluye fecha.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ENTORNOS MATEMÁTICOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheoremstyle{theoremGeM}
+  {\topsep}
+  {\topsep}
+  {\itshape}
+  {0pt}
+  {\bfseries\color{schoolcolor}}
+  {.}
+  { }
+  {\thmname{#1}\thmnumber{ #2}\textnormal{\thmnote{ (#3)}}}
+
+\theoremstyle{theoremGeM}
+\newtheorem{thm}{Teorema}[chapter]
+\newtheorem{prop}[thm]{Proposición}
+\newtheorem{lem}[thm]{Lema}
+
+\AtBeginDocument{
+    \renewcommand*{\proofname}{\color{schoolcolor}Demostración}
+}
+
+\newtheoremstyle{remarkGeM}
+  {\topsep}
+  {\topsep}
+  {}
+  {0pt}
+  {\itshape\color{schoolcolor}}
+  {.}
+  { }
+  {\thmname{#1}\thmnumber{ #2}\textnormal{\thmnote{ (#3)}}}
+
+\theoremstyle{remarkGeM}
+\newtheorem*{rmk}{Observación}
+\newtheorem{exm}[thm]{Ejemplo}
+
+\newtheoremstyle{definitionGeM}
+  {\topsep}
+  {\topsep}
+  {}
+  {0pt}
+  {\bfseries\color{schoolcolor}}
+  {.}
+  { }
+  {\thmname{#1}\thmnumber{ #2}\textnormal{\thmnote{ (#3)}}}
+
+\theoremstyle{definitionGeM}
+\newtheorem{defn}[thm]{Definición}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESUMEN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\abstract{spanish}{
+Este proyecto estudia la dinámica de un campo escalar masivo en espacio-tiempo
+plano y en la geometría de un agujero negro de Schwarzschild. En una primera
+etapa se analiza numéricamente la ecuación de Klein--Gordon en espacio plano
+y se comprueba su relación de dispersión. Posteriormente, se introduce la
+geometría de Schwarzschild y se reduce el problema mediante la simetría
+esférica y el uso de la coordenada tortuga.
+
+El objetivo principal es estudiar la aparición de estados cuasi-ligados del
+campo escalar alrededor del agujero negro. Estos estados satisfacen condiciones
+de contorno físicamente determinadas: comportamiento puramente entrante en el
+horizonte de sucesos y decaimiento espacial en el infinito. Como consecuencia,
+sus frecuencias son en general complejas y, en el caso de Schwarzschild, su
+parte imaginaria es negativa, lo que corresponde a modos que decaen con el
+tiempo.
+
+El problema se abordará tanto mediante la evolución temporal de la ecuación
+de Klein--Gordon como mediante la formulación de un problema de autovalores
+para la ecuación radial. La comparación entre ambos enfoques permitirá
+relacionar directamente la dinámica observada en las simulaciones con las
+autofrecuencias de los estados cuasi-ligados.
+}
+
+\keywords{spanish}{
+    Ecuación de Klein--Gordon;
+    Agujero negro de Schwarzschild;
+    Estados cuasi-ligados;
+    Ecuaciones en derivadas parciales;
+    Métodos numéricos
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\abstract{english}{
+This project studies the dynamics of a massive scalar field in flat spacetime
+and in the geometry of a Schwarzschild black hole. First, the Klein--Gordon
+equation is analysed numerically in flat spacetime and its dispersion relation
+is verified. The Schwarzschild geometry is then introduced, and the problem
+is reduced by exploiting spherical symmetry and using the tortoise coordinate.
+
+The main objective is to study the appearance of quasi-bound states of the
+scalar field around the black hole. These states satisfy physically motivated
+boundary conditions: purely ingoing behaviour at the event horizon and
+spatial decay at infinity. As a consequence, their frequencies are generally
+complex and, in the Schwarzschild case, their imaginary part is negative,
+corresponding to modes that decay with time.
+
+The problem will be approached both through the time evolution of the
+Klein--Gordon equation and through an eigenvalue formulation of the radial
+equation. Comparing both approaches will make it possible to directly relate
+the dynamics observed in the simulations to the eigenfrequencies of the
+quasi-bound states.
+}
+
+\keywords{english}{
+    Klein--Gordon equation;
+    Schwarzschild black hole;
+    Quasi-bound states;
+    Partial differential equations;
+    Numerical methods
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\nocite{*}
+
+
+% Capítulos principales
+\input{chapters/01_introduction}
+\input{chapters/02_fundamentos}
+\input{chapters/03_formulacion_schwarzschild}
+\input{chapters/04_metodologia_numerica}
+\input{chapters/05_validacion_espacio_plano}
+\input{chapters/06_estados_cuasiligados}
+\input{chapters/07_resultados_discusion}
+\input{chapters/08_conclusiones}
+
+% Apéndices
+\appendix
+\input{appendices/A_derivacion_klein_gordon}
+\input{appendices/B_reduccion_radial}
+\input{appendices/C_detalles_numericos}
+\input{appendices/D_unidades}
+
+\end{document}

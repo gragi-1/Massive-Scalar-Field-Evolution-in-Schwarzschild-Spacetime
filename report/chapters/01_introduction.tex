@@ -1,0 +1,15 @@
+% !TEX root = ../main.tex
+
+\chapter{Introducción}
+\label{ch:introduccion}
+Este documento en formato {\sffamily pdf} acompaña a otras dos carpetas que contienen material \LaTeX: \texttt{Portada TFG-GEM} y \texttt{Plantilla TFG-GEM}. 
+
+La primera carpeta, \texttt{Portada TFG-GEM}, contiene  logotipos de la UPM, la EPES y el GeM, junto con dos ficheros \LaTeX~ que sirven para configurar la portada del trabajo fin de grado (TFG), incluyendo el título, los nombres del autor y de los tutores, además de la fecha. También aparecen configuradas ---para quien desee añadirlas--- una contraportada y una licencia Creative Commons, necesaria para publicar el trabajo en el repositorio de la UPM.
+
+La segunda carpeta, \texttt{Plantilla TFG-GEM}, contiene lo anterior más una plantilla completa para redactar el TFG en formato \LaTeX~, la cual incluye un fichero de estilo propio: \texttt{GEM-UPM.cls}. Como se puede fácilmente suponer de la lectura de las primeras páginas, esta documentación sigue el mismo formato de la plantilla, por lo que sirve para hacerse una idea del resultado final que se puede esperar. La razón para no tomar este documento como la plantilla misma ---aunque tienen muchos elementos en común--- es que utiliza el paquete \texttt{minted}, cuyo propósito es introducir líneas de código dentro del texto. El uso de \texttt{minted} lleva aparejado una serie de procesos bastante elaborados ---como, por ejemplo, una llamada a Python---, lo cual hace aconsejable que no aparezca en la plantilla en una primera instancia. No obstante lo anterior, \texttt{minted} está cargado en el fichero de estilo y en la sección \ref{s:minted} se darán todas las instrucciones necesarias para su uso.
+
+La plantilla puede compilarse en la plataforma Overleaf. Simplemente recuerda que, en ocasiones, para que la compilación no dé errores, es necesario llevarla a cabo desde el fichero principal, que en este caso se llama \texttt{main.tex}. 
+
+Si compilas los ficheros en local fuera de la plataforma Overleaf, ten en cuenta que el fichero de estilo \texttt{GeM-UPM.cls} requiere usar el motor de compilación pdf\LaTeX~ y, posiblemente, compilar varias veces para que se ejecuten los índices y se actualice la bibliografía. Además, comprueba que la codificación de los caracteres en el procesador de texto que utilices es la estándar; es decir, UTF-8,  y no la obsoleta Latin-1. Por último, en el caso de usar el programa TeXShop en un ordenador Mac, es necesario utilizar el motor de compilación pdf\LaTeX mk.
+
+

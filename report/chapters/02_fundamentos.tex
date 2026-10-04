@@ -1,0 +1,61 @@
+% !TEX root = ../main.tex
+
+\chapter{Fundamentos físicos y matemáticos}
+
+La carpeta \texttt{Plantilla TFG-GEM} consta de varios ficheros y subcarpetas. Aunque su estructura puede parecer compleja a primera vista, facilita mucho la organización de la memoria. El listado de los diferentes elementos es el siguiente.
+\begin{itemize}
+    \item \texttt{./appendices/}: carpeta donde se incluyen los ficheros \LaTeX~ de los diferentes apéndices o anexos que aparecen al final de la memoria, en caso de que se quieran utilizar.
+    \item \texttt{./chapters/}: carpeta donde se incluyen los ficheros \LaTeX~ de los capítulos que forman parte del cuerpo de la memoria.
+    \item \texttt{./figures/}: carpeta donde se incluyen las figuras (imágenes, diagramas) que se usarán a lo largo de todo el documento.
+    \item \texttt{./logos/}: carpeta que contiene los logotipos de la Universidad Politécnica de Madrid, de la Escuela Politécnica de Enseñanza Superior y del Grado en Matemáticas. Esta carpeta se utiliza en el fichero de estilo \texttt{GeM-UPM.cls}, por lo que es aconsejable no cambiarla de ubicación o nombre.
+    \item \texttt{./GeM-UPM.cls}: fichero de estilo de la memoria. 
+    \item \texttt{./main.tex}: fichero principal a partir del cual se compila todo el trabajo. No conviene cambiarle de nombre porque se utiliza en el fichero de estilo \texttt{GeM-UPM.cls}.
+    \item \texttt{./referencias.bib}: fichero que contiene las entradas de la bibliografía a las que se hace referencia en la memoria en formato \hologo{BibTeX}.
+    \item \texttt{./referencias.tex}: fichero que contiene las entradas de la bibliografía en formato \LaTeX. Solo es necesario utilizar uno de los dos ficheros que contienen la bibliografía: cuál se use depende del formato elegido; véase la sección~\ref{s:referencias-bibliograficas}
+\end{itemize}    
+
+En el caso de que únicamente se quiera utilizar la portada de la plantilla ---y, quizás, añadir la licencia Creative Commons y la contraportada---, hay que utilizar la carpeta \texttt{Portada TFG-GEM}, cuya estructura es mucho más simple que la de la plantilla: contiene la subcarpeta \texttt{logos}, el fichero principal \texttt{main.tex} ---en una versión mucho más reducida que el homónimo fichero de la plantilla--- y otro fichero \LaTeX~ llamado \texttt{portada.tex}, en el que se recopilan los comandos esenciales del fichero de estilo que bastan para configurar la portada. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{El fichero principal \texttt{main.tex}}
+
+A partir de ahora nos referiremos únicamente a los elementos que aparecen  en la carpeta \texttt{Plantilla TFG-GEM}. 
+
+Nótese que el fichero de estilo carga por defecto la opción \texttt{index}, que crea un índice alfabético, cuestión que se explica en la sección~\ref{s:indice}. Las otras opciones disponibles ---que si se utilizan han de escribirse junto a \texttt{index} separadas por comas--- son
+\begin{itemize}
+    \item \texttt{nonCC}, que debe ser seleccionada por el autor que no desee que su trabajo tenga licencia Creative Commons, necesaria para publicarlo en el repositorio de la UPM;
+    \item \texttt{biblatex}, para escribir la bibliografía en formato \hologo{BibTeX}. Véase la sección~\ref{s:referencias-bibliograficas};
+    \item \texttt{minted}, que se usa para insertar código fuente de un lenguaje de programación en el texto; véase la sección~\ref{s:minted}.
+\end{itemize} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bibliografía}
+\label{s:referencias-bibliograficas}
+
+Hay muchas formas diferentes de gestionar las referencias bibliográficas. Aquí se ofrecen dos posibilidades.
+
+\subsection{Bibliografía con {\ttfamily biblatex}}
+La primera consiste en utilizar el paquete \texttt{biblatex}, que constituye una forma cómoda y simple de manejar la bibliografía. Por defecto, el estilo de las citas es alfabético; véanse \cite{wiles95} y \cite{berger88}.
+
+\subsection{Bibliografía sin {\ttfamily biblatex}}
+La otra posibilidad es escribir la bibliografía en el fichero \texttt{referencias.tex} en formato \LaTeX~  y es la que viene cargada por defecto en el fichero de estilo, por lo que, para emplearla, no hay que hacer nada, salvo asegurarse de que no se ha seleccionado la opción \texttt{biblatex} en la primera línea del fichero \texttt{main.tex}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Índice alfabético}
+\label{s:indice}
+
+El índice alfabético es un listado ordenado lexicográficamente que aparece al final de la memoria, formado por aquellas palabras que deseamos destacar o que se encuentren rápidamente.
+
+La inclusión del índice alfabético es opcional; si no se crea ningún término de este tipo, entonces el índice alfabético no se mostrará.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{El fichero de estilo \texttt{GeM-UPM.cls}}\label{s:estilo}
+El fichero de estilo \texttt{GeM-UPM.cls} contiene todos los códigos e instrucciones que hacen que el documento, al compilar el fichero \texttt{main.tex}, se vea como es. En general, su manipulación requiere un conocimiento avanzado del lenguaje \LaTeX~  y no se recomienda modificarlo. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{El paquete \texttt{minted}}\label{s:minted}
+
+A lo largo de este documento se ha hecho un uso frecuente del paquete \texttt{minted} para mencionar diversos comandos de \LaTeX, por lo que parece conveniente dedicar unos comentarios que expliquen brevemente su propósito y funcionamiento. El paquete  \texttt{minted} se usa para añadir el código fuente de múltiples lenguajes de programación a un texto. Este paquete no se carga de manera automática, sino que hay que indicarlo en el preámbulo del fichero como una opción de la plantilla. 
