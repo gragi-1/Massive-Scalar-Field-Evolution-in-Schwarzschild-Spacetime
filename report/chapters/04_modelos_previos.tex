@@ -1,0 +1,215 @@
+% !TEX root = ../main.tex
+% Modelo especificado en F00 §6. Formulación y comprobaciones desarrolladas aquí.
+\chapter{Modelos Previos}
+\label{ch:modelos-previos}
+
+Antes de evolucionar un campo sobre Schwarzschild necesitamos comprobar
+que el procedimiento numérico reproduce un problema cuya solución conocemos.
+El caso elegido es Klein--Gordon en espacio plano con datos de un solo modo
+espacial. Conserva la dispersión masiva que nos interesa y permite separar
+el error del método de las dificultades introducidas por la geometría curva.
+En este capítulo formulamos el problema y construimos su referencia exacta;
+la discretización y los cálculos se presentan en el
+capítulo~\ref{ch:simulacion}.
+
+\section{Problema de referencia en espacio plano}
+
+Consideramos un campo real $\Phi(x,t)$, con $c>0$ y
+$\mu=m_\Phi c/\hbar>0$ constantes. Multiplicar
+\eqref{eq:kg-plana-1d} por $c^2$ da
+\begin{equation}
+\Phi_{tt}-c^2\Phi_{xx}+c^2\mu^2\Phi=0.
+\label{eq:kg-previo}
+\end{equation}
+La ecuación es de segundo orden temporal. Por eso no basta conocer el campo
+en $t=0$: también se necesita su velocidad inicial. La variable espacial
+requiere, a su vez, un dominio y condiciones en sus extremos. Son partes
+distintas del problema: los datos iniciales seleccionan el estado del campo
+y las condiciones de contorno especifican la geometría espacial de la prueba.
+
+\section{Dominio y condiciones del problema}
+
+Elegimos un intervalo $[0,L]$, con $L>0$, e identificamos sus extremos
+mediante periodicidad. Para soluciones clásicas imponemos
+\begin{equation}
+\Phi(0,t)=\Phi(L,t),\qquad \Phi_x(0,t)=\Phi_x(L,t).
+\label{eq:contorno-periodico}
+\end{equation}
+Así el campo y su primera derivada encajan al repetir el intervalo. Esta
+elección admite perfiles armónicos exactos y elimina de esta prueba las
+reflexiones de un borde artificial. El espacio modelado es periódico;
+no equivale a imponer una condición de radiación en un espacio infinito.
+Tampoco se interpreta como el contorno físico de un agujero negro.
+
+Un perfil $e^{ikx}$ es periódico si $e^{ik(x+L)}=e^{ikx}$. Dividir por
+$e^{ikx}\ne0$ exige $e^{ikL}=1$, es decir, $kL=2\pi j$ con $j\in\mathbb Z$.
+Los números de onda permitidos son, por tanto,
+\begin{equation}
+k_j=\frac{2\pi j}{L}.
+\label{eq:modos-periodicos}
+\end{equation}
+Su parte real, $\cos(k_jx)$, también es periódica. Para comprobar la
+derivada basta observar que $\partial_x\cos(k_jx)=-k_j\sin(k_jx)$
+y que $\sin(0)=\sin(2\pi j)=0$.
+
+Seleccionamos uno de esos modos y prescribimos
+\begin{equation}
+\Phi(x,0)=A\cos(k_jx),\qquad \Phi_t(x,0)=0.
+\label{eq:datos-previo}
+\end{equation}
+La velocidad inicial cero significa que el campo se libera desde ese perfil,
+no que vaya a permanecer estático: la EDP determina su aceleración.
+La amplitud $A$ tiene las unidades del campo. Para una prueba de frecuencia
+se toma $A\ne0$; si $A=0$, la solución de referencia es nula. El modo $j=0$
+es homogéneo en el espacio, mientras que para $j\ne0$ la longitud de onda
+positiva es $L/|j|$. Los índices $j$ y $-j$ dan el mismo perfil de coseno.
+
+\section{Solución analítica de referencia}
+
+\subsection{Reducción del modo a un oscilador}
+La función $\cos(k_jx)$ es autofunción de la segunda derivada espacial:
+$\partial_x^2\cos(k_jx)=-k_j^2\cos(k_jx)$. Por ello buscamos una solución
+que conserve ese perfil y cambie su amplitud con el tiempo,
+\[
+\Phi(x,t)=a_j(t)\cos(k_jx).
+\]
+Esta elección está motivada por el operador de coeficientes constantes y
+el contorno periódico. Al sustituir en \eqref{eq:kg-previo},
+\[
+\bigl[a_j''(t)+c^2(k_j^2+\mu^2)a_j(t)\bigr]\cos(k_jx)=0.
+\]
+Como el coseno no es idénticamente cero y la igualdad vale para todo $x$,
+el coeficiente temporal debe anularse:
+\[
+a_j''+\omega_{k_j}^2a_j=0,\qquad
+\omega_{k_j}=c\sqrt{k_j^2+\mu^2}>0.
+\]
+La EDP se ha reducido a la misma estructura de oscilador que resolvimos
+en Preliminares. Sus datos son $a_j(0)=A$ y $a_j'(0)=0$. Aplicando
+\eqref{eq:oscilador-datos}, con $y_0$ reemplazado por $A$ y $v_0=0$,
+obtenemos $a_j(t)=A\cos(\omega_{k_j}t)$. La solución candidata es
+\begin{equation}
+\Phi_{\mathrm{ex}}(x,t)=A\cos(k_jx)\cos(\omega_{k_j}t).
+\label{eq:solucion-exacta-previo}
+\end{equation}
+El perfil es una onda estacionaria. La identidad del producto de cosenos
+permite reconocerla como superposición de dos modos viajeros:
+\[
+\Phi_{\mathrm{ex}}(x,t)=\frac A2
+\bigl[\cos(k_jx-\omega_{k_j}t)+\cos(k_jx+\omega_{k_j}t)\bigr].
+\]
+Ambos términos tienen la misma frecuencia y sentidos de fase opuestos;
+su suma tiene velocidad inicial nula.
+
+\subsection{Comprobación del problema completo}
+Para comprobar la EDP calculamos
+\[
+\Phi_{\mathrm{ex},tt}=-\omega_{k_j}^2\Phi_{\mathrm{ex}},
+\qquad \Phi_{\mathrm{ex},xx}=-k_j^2\Phi_{\mathrm{ex}}.
+\]
+Su residuo en \eqref{eq:kg-previo} es
+\[
+\bigl[-\omega_{k_j}^2+c^2k_j^2+c^2\mu^2\bigr]\Phi_{\mathrm{ex}}=0.
+\]
+En el instante inicial, $\cos(0)=1$ devuelve $A\cos(k_jx)$ y
+\[
+\Phi_{\mathrm{ex},t}=-A\omega_{k_j}\cos(k_jx)\sin(\omega_{k_j}t)
+\]
+se anula en cero. La periodicidad espacial se mantiene para todo $t$
+porque el factor temporal es independiente de $x$. Se satisfacen, por
+separado, la EDP, los dos datos iniciales y las dos condiciones de contorno.
+
+\subsection{Unicidad y control de perturbaciones}
+La verificación anterior establece la existencia de una solución para los
+datos elegidos. Para justificar su uso como referencia debemos descartar
+que otra solución clásica del mismo problema pueda dar una evolución
+diferente. Si $w$ es la diferencia de dos soluciones reales $C^2$,
+satisface la misma EDP y el mismo contorno periódico. Definimos
+\[
+\mathcal E_w(t)=\frac12\int_0^L
+\left(c^{-2}w_t^2+w_x^2+\mu^2w^2\right)\,dx.
+\]
+Este funcional es no negativo. Derivarlo en tiempo da
+\[
+\mathcal E_w'(t)=\int_0^L
+\left(c^{-2}w_tw_{tt}+w_xw_{xt}+\mu^2ww_t\right)\,dx.
+\]
+Integramos el segundo término por partes en $x$,
+\[
+\int_0^L w_xw_{xt}\,dx=[w_xw_t]_0^L-\int_0^L w_{xx}w_t\,dx,
+\]
+y agrupamos:
+\[
+\mathcal E_w'(t)=
+\int_0^L w_t\left(c^{-2}w_{tt}-w_{xx}+\mu^2w\right)\,dx
++[w_xw_t]_0^L=0.
+\]
+La integral se anula por la EDP. El borde se cancela porque $w_x$ es
+periódica y $w_t$ también lo es, al derivar en tiempo la igualdad
+$w(0,t)=w(L,t)$. Así, $\mathcal E_w(t)=\mathcal E_w(0)$.
+Si las dos soluciones tienen los mismos datos, $w(x,0)=w_t(x,0)=0$ y
+$w_x(x,0)=0$; por tanto, $\mathcal E_w(0)=0$. Como $\mu>0$,
+\[
+\frac{\mu^2}{2}\int_0^L w(x,t)^2\,dx\le\mathcal E_w(t)=0.
+\]
+La continuidad implica $w=0$ y prueba la unicidad en esta clase.
+
+El mismo cálculo controla perturbaciones de los datos. Definimos la norma
+\[
+\|f\|_{L^2(0,L)}=\left(\int_0^L|f(x)|^2\,dx\right)^{1/2}.
+\]
+La conservación anterior implica
+\[
+\|w(t)\|_{L^2}\le\frac{\sqrt{2\mathcal E_w(0)}}\mu,
+\qquad
+\|w_t(t)\|_{L^2}\le c\sqrt{2\mathcal E_w(0)}.
+\]
+Así, datos cercanos en la norma asociada a $\mathcal E_w$ producen campos
+cercanos mientras existan las soluciones clásicas. Esta propiedad del
+problema continuo será la referencia al analizar la estabilidad numérica;
+no garantiza por sí sola que cualquier discretización sea estable.
+
+\section{Objetivos de validación y parámetros}
+\label{sec:parametros-previos}
+
+La prueba numérica debe responder a dos cuestiones relacionadas pero distintas:
+reproducir la solución \eqref{eq:solucion-exacta-previo} y recuperar su
+frecuencia $\omega_{k_j}$. Comparar solo la forma de una gráfica no basta;
+mediremos errores y su variación al refinar la malla. La elección de malla,
+el integrador, las normas discretas y la extracción de frecuencia se
+justifican en Simulación.
+
+Las magnitudes físicas del modelo se recogen en la
+Tabla~\ref{tab:parametros-previos}. Para ejecutar la validación se usan
+las variables adimensionales de \eqref{eq:kg-adimensional}. En particular,
+$\widehat L=L/L_0$, $\widehat A=A/\Phi_0$,
+$\widehat k_j=k_jL_0$ y $\widehat\omega_j=\omega_{k_j}L_0/c$ satisfacen
+\[
+\widehat k_j=\frac{2\pi j}{\widehat L},\qquad
+\widehat\omega_j=\sqrt{\widehat k_j^2+\widehat\mu^2}.
+\]
+Elegir $\widehat L=2\pi$, $\widehat\mu=0.7$ y $\widehat A=1$ proporciona
+una familia de pruebas reproducibles, sin seleccionar una masa física ni
+atribuir a estos valores significado observacional.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lXlX@{}}
+\toprule
+Símbolo & Magnitud & Unidad SI & Elección de validación \\
+\midrule
+$\Phi$, $A$ & Campo y amplitud & Como el campo & $\widehat A=1$ \\
+$c$ & Velocidad de la luz & $\mathrm{m\,s^{-1}}$ & Absorbida en $\widehat t$ \\
+$m_\Phi$ & Masa física del campo & kg & Sin masa SI seleccionada \\
+$\mu$ & Parámetro $m_\Phi c/\hbar$ & $\mathrm{m^{-1}}$ & $\widehat\mu=0.7$ \\
+$L$ & Longitud del dominio & m & $\widehat L=2\pi$ \\
+$j$ & Índice del modo & $1$ & $1,2,3,4$ \\
+$k_j$ & Número de onda permitido & $\mathrm{m^{-1}}$ & $\widehat k_j=j$ \\
+$\omega_{k_j}$ & Frecuencia angular exacta & $\mathrm{s^{-1}}$ & $\widehat\omega_j=\sqrt{j^2+0.7^2}$ \\
+\bottomrule
+\end{tabularx}
+\caption{Parámetros del modelo previo y valores adimensionales elegidos
+para la primera validación. Los parámetros de discretización pertenecen
+a Simulación.}
+\label{tab:parametros-previos}
+\end{table}

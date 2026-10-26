@@ -1,61 +1,485 @@
 % !TEX root = ../main.tex
+% Base principal elegida por el usuario: F02a p. 1. Energía: F02b p. 2.
+\chapter{Preliminares}
+\label{ch:preliminares}
 
-\chapter{Fundamentos físicos y matemáticos}
+El objetivo de este capítulo es construir el modelo de campo que se utilizará
+más adelante. El punto de partida es un sistema mecánico cuya dinámica puede
+resolverse por completo: una masa unida a un muelle. Su estudio permite
+introducir la frecuencia, la amplitud y la fase antes de incorporar una
+variable espacial. A continuación, las relaciones cuánticas y relativistas
+proporcionan una dispersión que servirá para construir Klein--Gordon.
+El desarrollo sigue el recorrido del manuscrito
+\textit{Derivación de la ecuación de onda} \cite[p.~1]{ApuntesOnda};
+la deducción de la energía se apoya en el segundo manuscrito
+\cite[p.~2]{ApuntesOscilador}. Cada paso distingue las leyes físicas
+adoptadas de las consecuencias matemáticas y de las hipótesis del modelo.
 
-La carpeta \texttt{Plantilla TFG-GEM} consta de varios ficheros y subcarpetas. Aunque su estructura puede parecer compleja a primera vista, facilita mucho la organización de la memoria. El listado de los diferentes elementos es el siguiente.
-\begin{itemize}
-    \item \texttt{./appendices/}: carpeta donde se incluyen los ficheros \LaTeX~ de los diferentes apéndices o anexos que aparecen al final de la memoria, en caso de que se quieran utilizar.
-    \item \texttt{./chapters/}: carpeta donde se incluyen los ficheros \LaTeX~ de los capítulos que forman parte del cuerpo de la memoria.
-    \item \texttt{./figures/}: carpeta donde se incluyen las figuras (imágenes, diagramas) que se usarán a lo largo de todo el documento.
-    \item \texttt{./logos/}: carpeta que contiene los logotipos de la Universidad Politécnica de Madrid, de la Escuela Politécnica de Enseñanza Superior y del Grado en Matemáticas. Esta carpeta se utiliza en el fichero de estilo \texttt{GeM-UPM.cls}, por lo que es aconsejable no cambiarla de ubicación o nombre.
-    \item \texttt{./GeM-UPM.cls}: fichero de estilo de la memoria. 
-    \item \texttt{./main.tex}: fichero principal a partir del cual se compila todo el trabajo. No conviene cambiarle de nombre porque se utiliza en el fichero de estilo \texttt{GeM-UPM.cls}.
-    \item \texttt{./referencias.bib}: fichero que contiene las entradas de la bibliografía a las que se hace referencia en la memoria en formato \hologo{BibTeX}.
-    \item \texttt{./referencias.tex}: fichero que contiene las entradas de la bibliografía en formato \LaTeX. Solo es necesario utilizar uno de los dos ficheros que contienen la bibliografía: cuál se use depende del formato elegido; véase la sección~\ref{s:referencias-bibliograficas}
-\end{itemize}    
+\section{Oscilador armónico: ecuación y datos iniciales}
+\label{sec:oscilador}
 
-En el caso de que únicamente se quiera utilizar la portada de la plantilla ---y, quizás, añadir la licencia Creative Commons y la contraportada---, hay que utilizar la carpeta \texttt{Portada TFG-GEM}, cuya estructura es mucho más simple que la de la plantilla: contiene la subcarpeta \texttt{logos}, el fichero principal \texttt{main.tex} ---en una versión mucho más reducida que el homónimo fichero de la plantilla--- y otro fichero \LaTeX~ llamado \texttt{portada.tex}, en el que se recopilan los comandos esenciales del fichero de estilo que bastan para configurar la portada. 
+\subsection{Del sistema físico a la ecuación diferencial}
+Consideramos una masa $m>0$ unida a un muelle de constante elástica $K>0$.
+Denotamos por $y(t)$ su desplazamiento respecto del equilibrio; el signo de
+$y$ indica a qué lado de este se encuentra. Suponemos movimiento en una
+sola dirección, ausencia de rozamiento y deformaciones dentro del régimen
+lineal del muelle. Con estas hipótesis, las leyes de Newton y Hooke son
+\[
+F=m\ddot y(t),\qquad F=-Ky(t).
+\]
+La primera relaciona la fuerza resultante con la aceleración. La segunda
+expresa que la fuerza elástica se opone al desplazamiento: para $y>0$ es
+negativa, y para $y<0$ es positiva. Igualándolas y dividiendo por $m$,
+\begin{equation}
+\ddot y+\frac Km y=0.
+\label{eq:oscilador-edo}
+\end{equation}
+Esta EDO determina la evolución, pero necesita dos datos para seleccionar
+un movimiento concreto: el desplazamiento inicial $y_0$ y la velocidad
+inicial $v_0$. Por tanto, el problema que resolveremos es
+\[
+\ddot y+\frac Km y=0,\qquad y(0)=y_0,\qquad \dot y(0)=v_0.
+\]
+El equilibrio $y=0$ es una solución; la finalidad es encontrar también
+los movimientos que parten de otros datos.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{El fichero principal \texttt{main.tex}}
+\subsection{Resolución mediante la ecuación característica}
+La ecuación tiene coeficientes constantes y es lineal. Una exponencial
+es adecuada como solución de prueba porque sus derivadas son proporcionales
+a la propia función. Siguiendo el manuscrito, proponemos $y(t)=e^{rt}$,
+con $r\in\mathbb C$ como parámetro auxiliar. Entonces
+\[
+\dot y=re^{rt},\qquad \ddot y=r^2e^{rt},
+\]
+y al sustituir en \eqref{eq:oscilador-edo} obtenemos
+\[
+r^2e^{rt}+\frac Km e^{rt}=0
+\quad\Longleftrightarrow\quad
+ e^{rt}\left(r^2+\frac Km\right)=0.
+\]
+Como $e^{rt}\ne0$, debe cumplirse la ecuación característica
+\[
+r^2+\frac Km=0,\qquad r^2=-\frac Km.
+\]
+La positividad de $K/m$ implica que las dos raíces son imaginarias puras:
+\[
+r_1=i\sqrt{K/m},\qquad r_2=-i\sqrt{K/m}.
+\]
+Definimos, una vez obtenidas las raíces, la frecuencia angular propia
+\begin{equation}
+\omega_0=\sqrt{\frac Km}>0.
+\label{eq:omega-oscilador}
+\end{equation}
+La combinación de las dos soluciones exponenciales se escribe
+\[
+y(t)=C_1e^{i\omega_0t}+C_2e^{-i\omega_0t}.
+\]
+La fórmula de Euler $e^{i\theta}=\cos\theta+i\sin\theta$ da
+\[
+y(t)=(C_1+C_2)\cos(\omega_0t)
++i(C_1-C_2)\sin(\omega_0t).
+\]
+Para obtener un desplazamiento real tomamos $C_2=\overline{C_1}$. Así,
+$C=C_1+C_2$ y $D=i(C_1-C_2)$ son reales, y llegamos a
+\begin{equation}
+y(t)=C\cos(\omega_0t)+D\sin(\omega_0t).
+\label{eq:oscilador-general}
+\end{equation}
+Las exponenciales han sido un recurso de cálculo; el movimiento físico
+se expresa finalmente mediante una función real.
 
-A partir de ahora nos referiremos únicamente a los elementos que aparecen  en la carpeta \texttt{Plantilla TFG-GEM}. 
+\subsection{Determinación de las constantes}
+Evaluar \eqref{eq:oscilador-general} en $t=0$ proporciona $C=y_0$.
+Para utilizar la velocidad derivamos la solución:
+\[
+\dot y(t)=-C\omega_0\sin(\omega_0t)+D\omega_0\cos(\omega_0t).
+\]
+En cero resulta $v_0=D\omega_0$, de donde $D=v_0/\omega_0$. Por tanto,
+\begin{equation}
+y(t)=y_0\cos(\omega_0t)+\frac{v_0}{\omega_0}\sin(\omega_0t).
+\label{eq:oscilador-datos}
+\end{equation}
+Esta expresión satisface la EDO y admite cualquier pareja real $(y_0,v_0)$.
+Para justificar que describe todo el problema, escribimos $Y=(y,\dot y)$:
+\[
+\dot Y=B Y,\qquad B=\begin{pmatrix}0&1\\-K/m&0\end{pmatrix}.
+\]
+La aplicación $Y\mapsto BY$ es Lipschitz, ya que
+$\|BY-BZ\|\le\|B\|\,\|Y-Z\|$. El teorema de existencia y unicidad para
+problemas de valor inicial garantiza entonces la unicidad local
+\cite[\S2.2, teorema 2.2]{TeschlNotas}. Como la expresión
+\eqref{eq:oscilador-datos} está definida para todo $t$, proporciona la
+solución global para cada dato inicial. No hemos supuesto de antemano
+que el movimiento fuera un coseno: esta forma ha surgido al resolver la EDO.
 
-Nótese que el fichero de estilo carga por defecto la opción \texttt{index}, que crea un índice alfabético, cuestión que se explica en la sección~\ref{s:indice}. Las otras opciones disponibles ---que si se utilizan han de escribirse junto a \texttt{index} separadas por comas--- son
-\begin{itemize}
-    \item \texttt{nonCC}, que debe ser seleccionada por el autor que no desee que su trabajo tenga licencia Creative Commons, necesaria para publicarlo en el repositorio de la UPM;
-    \item \texttt{biblatex}, para escribir la bibliografía en formato \hologo{BibTeX}. Véase la sección~\ref{s:referencias-bibliograficas};
-    \item \texttt{minted}, que se usa para insertar código fuente de un lenguaje de programación en el texto; véase la sección~\ref{s:minted}.
-\end{itemize} 
+En SI, $[K]=\mathrm{kg\,s^{-2}}$ y $[m]=\mathrm{kg}$, por lo que
+$[\omega_0]=\mathrm{s^{-1}}$. El término $v_0/\omega_0$ tiene unidades
+de longitud, igual que $y_0$, lo que comprueba la coherencia de la solución.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Bibliografía}
-\label{s:referencias-bibliograficas}
+\section{Amplitud, fase y periodo}
 
-Hay muchas formas diferentes de gestionar las referencias bibliográficas. Aquí se ofrecen dos posibilidades.
+La solución contiene dos contribuciones que oscilan con la misma frecuencia.
+Para describir el tamaño de la oscilación y su estado inicial resulta útil
+reunirlas en un solo coseno. La identidad
+\[
+\cos(\alpha-\beta)=\cos\alpha\cos\beta+\sin\alpha\sin\beta
+\]
+implica, al tomar $\alpha=\omega_0t$ y $\beta=\varphi$,
+\[
+A\cos(\omega_0t-\varphi)
+=A\cos\varphi\cos(\omega_0t)+A\sin\varphi\sin(\omega_0t).
+\]
+Esta expresión coincide con \eqref{eq:oscilador-general} si
+\[
+C=A\cos\varphi,\qquad D=A\sin\varphi.
+\]
+Al elevar al cuadrado y sumar, la identidad
+$\cos^2\varphi+\sin^2\varphi=1$ da $C^2+D^2=A^2$. Elegimos $A\ge0$:
+\[
+A=\sqrt{C^2+D^2}
+=\sqrt{y_0^2+\left(\frac{v_0}{\omega_0}\right)^2}.
+\]
+Si $A>0$, la pareja $(C/A,D/A)$ determina el coseno y el seno de la fase.
+La elección $\varphi=\operatorname{atan2}(D,C)$ conserva el cuadrante del
+vector $(C,D)$ y también sirve cuando $C=0$. En cambio,
+$\arctan(D/C)$ por sí sola no distingue cuadrantes. Así obtenemos
+\begin{equation}
+y(t)=A\cos(\omega_0t-\varphi).
+\label{eq:oscilador-amplitud-fase}
+\end{equation}
+La fase se entiende módulo $2\pi$: sumar un múltiplo entero de $2\pi$
+no modifica $y$. Si $A=0$, la solución es nula y no tiene una fase determinada.
+Para una solución no nula, los extremos son $A$ y $-A$. La amplitud depende
+de los datos iniciales, mientras que $\omega_0$ depende de $K$ y $m$.
 
-\subsection{Bibliografía con {\ttfamily biblatex}}
-La primera consiste en utilizar el paquete \texttt{biblatex}, que constituye una forma cómoda y simple de manejar la bibliografía. Por defecto, el estilo de las citas es alfabético; véanse \cite{wiles95} y \cite{berger88}.
+El periodo $T$ es el menor tiempo positivo que repite el movimiento. La fase
+del coseno debe aumentar $2\pi$, de modo que
+\[
+\omega_0T=2\pi,\qquad T=\frac{2\pi}{\omega_0}.
+\]
+La frecuencia ordinaria $\nu=1/T$ cuenta ciclos por segundo; la frecuencia
+angular $\omega_0=2\pi\nu$ mide variación de fase por segundo. Esta
+interpretación de frecuencia y fase se mantendrá al introducir ondas.
 
-\subsection{Bibliografía sin {\ttfamily biblatex}}
-La otra posibilidad es escribir la bibliografía en el fichero \texttt{referencias.tex} en formato \LaTeX~  y es la que viene cargada por defecto en el fichero de estilo, por lo que, para emplearla, no hay que hacer nada, salvo asegurarse de que no se ha seleccionado la opción \texttt{biblatex} en la primera línea del fichero \texttt{main.tex}. 
+\section{Conservación de energía y potencial elástico}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Índice alfabético}
-\label{s:indice}
+La conexión con la energía se obtiene de la ecuación del movimiento,
+siguiendo el procedimiento de la página 2 de CamScanner
+\cite{ApuntesOscilador}. Multiplicamos $m\ddot y=-Ky$ por $\dot y$:
+\[
+m\ddot y\,\dot y=-Ky\,\dot y.
+\]
+La regla de la cadena permite reconocer las derivadas
+\[
+\frac{d}{dt}\left(\frac12m\dot y^2\right)=m\dot y\ddot y,
+\qquad
+\frac{d}{dt}\left(\frac12Ky^2\right)=Ky\dot y.
+\]
+Por tanto,
+\begin{equation}
+\frac{d}{dt}\left(\frac12m\dot y^2+\frac12Ky^2\right)=0.
+\label{eq:conservacion-oscilador}
+\end{equation}
+La suma es constante a lo largo del movimiento:
+\begin{equation}
+E=\frac12m\dot y^2+\frac12Ky^2
+=\frac12mv_0^2+\frac12Ky_0^2.
+\label{eq:energia-oscilador}
+\end{equation}
+Solo después de obtener esta conservación identificamos el primer término
+como energía cinética y el segundo como potencial elástico,
+\[
+V(y)=\frac12Ky^2,
+\]
+con el origen de energía elegido en $y=0$. Tanto $m\dot y^2$ como $Ky^2$
+tienen dimensión de energía, $\mathrm{kg\,m^2\,s^{-2}}$.
+\footnote{La página 2 del manuscrito usa $q$ en lugar de $y$. En dos sumas
+omite el cuadrado del desplazamiento en el término elástico, aunque la
+identificación final de $V(q)=Kq^2/2$ es correcta. Se restituye el cuadrado
+sin cambiar el razonamiento; aquí se mantiene la notación $y$ del manuscrito
+principal.}
+La conservación expresa un intercambio entre energía cinética y potencial;
+la ausencia de rozamiento es esencial para que la suma permanezca constante.
 
-El índice alfabético es un listado ordenado lexicográficamente que aparece al final de la memoria, formado por aquellas palabras que deseamos destacar o que se encuentren rápidamente.
+La representación amplitud--fase permite comprobar además qué determina
+el valor de $E$. Sustituyendo $y=A\cos(\omega_0t-\varphi)$ y
+$\dot y=-A\omega_0\sin(\omega_0t-\varphi)$, y usando $m\omega_0^2=K$,
+\[
+E=\frac12KA^2\bigl[\sin^2(\omega_0t-\varphi)+
+\cos^2(\omega_0t-\varphi)\bigr]=\frac12KA^2.
+\]
+La energía fija así la amplitud, mientras que la fase indica en qué punto
+de la oscilación se encuentra el sistema en el instante inicial.
 
-La inclusión del índice alfabético es opcional; si no se crea ningún término de este tipo, entonces el índice alfabético no se mostrará.
+\section{Dependencia espacial y modos armónicos}
+
+Hasta ahora $y$ dependía únicamente del tiempo. Para introducir una
+coordenada espacial, el manuscrito considera una fila de puntos separados
+por una distancia $a>0$: $x_n=na$, con $n=0,1,2,\ldots$
+\cite[p.~1, columna izquierda]{ApuntesOnda}. Supongamos que el primero
+oscila como $y_0(t)=A\cos(\omega t)$ y que cada punto reproduce la misma
+oscilación con un retraso de fase $\delta$ respecto del anterior. Entonces
+\[
+y_1(t)=A\cos(\omega t-\delta),\qquad
+y_2(t)=A\cos(\omega t-2\delta),
+\]
+y, para el punto $n$,
+\[
+y_n(t)=A\cos(\omega t-n\delta).
+\]
+Esta es una hipótesis sobre el patrón transmitido. Si se modela un retraso
+temporal $\Delta t_{\mathrm{ret}}>0$ por punto, se cumple
+$\delta=\omega\Delta t_{\mathrm{ret}}$, pues
+$y_n(t)=y_0(t-n\Delta t_{\mathrm{ret}})$.
+
+La relación $x_n=na$ permite escribir
+\[
+n\delta=\frac\delta a x_n.
+\]
+Definimos el número de onda $k=\delta/a$. El patrón en los puntos se
+representa entonces por la función continua
+\begin{equation}
+y(x,t)=A\cos(\omega t-kx).
+\label{eq:onda-desfase}
+\end{equation}
+La función coincide con $y_n(t)$ en $x=x_n$. Esta construcción motiva
+una dependencia espacial, pero no especifica fuerzas de acoplamiento
+entre los puntos: no es todavía una deducción dinámica de una cadena.
+Tampoco obliga a que todas las perturbaciones posibles sean sinusoidales.
+
+Con una fase inicial, el mismo patrón se escribe
+\[
+y(x,t)=A\cos(\omega t-kx-\varphi)
+=A\cos(kx-\omega t+\varphi),
+\]
+donde la igualdad utiliza que el coseno es par. Para $k>0$, repetir la fase
+al avanzar una longitud de onda $\lambda>0$ exige $k\lambda=2\pi$; repetirla
+al avanzar un periodo $T>0$ exige $\omega T=2\pi$. Por tanto,
+\[
+k=\frac{2\pi}{\lambda},\qquad \omega=\frac{2\pi}{T}.
+\]
+Si $k$ tiene signo, $\lambda=2\pi/|k|$ para $k\ne0$; $k=0$ corresponde a
+un perfil homogéneo. La fase constante $kx-\omega t+\varphi=\mathrm{cte}$
+se desplaza con velocidad $v_{\mathrm f}=\omega/k$. Esta es una propiedad
+del modo elegido; aún no hemos establecido una ley física que relacione
+$k$ con $\omega$. Precisamente esa relación es la que necesitaremos para
+construir una ecuación de evolución del campo.
+
+\section{Principios físicos y dispersión}
+
+Un campo escalar asigna un valor a cada punto y a cada instante. En una
+dimensión escribimos $\Phi(x,t)$; en tres, $\Phi(\boldsymbol{x},t)$.
+Esta variable describe una configuración distribuida, no la trayectoria
+de una masa puntual. Reservamos $\varphi$ para la fase y usamos $\Phi$
+para el campo, que en el manuscrito también se representa con una phi.
+Al introducir la masa del campo usaremos $m_\Phi$, para distinguirla de
+la masa $m$ del muelle sin alterar la notación de la derivación mecánica.
+
+La dispersión relativista se obtiene incorporando tres fundamentos físicos
+independientes del oscilador \cite[p.~1, columna derecha]{ApuntesOnda}.
+La relación energía--frecuencia es $E=h\nu=\hbar\omega$, donde $h$ es la
+constante de Planck y $\hbar=h/(2\pi)$. La relación de de Broglie es
+$p=h/\lambda=\hbar k$ para un modo propagándose en la dirección positiva;
+con signos, $p$ y $k$ son componentes en esa dirección. Finalmente, la
+relatividad especial establece
+\[
+E^2=p^2c^2+m_\Phi^2c^4,
+\]
+donde $c$ es la velocidad de la luz en el vacío. Estas relaciones se adoptan
+como principios: Newton y Hooke no permiten deducirlas.
+
+Sustituimos $E=\hbar\omega$ y $p=\hbar k$:
+\[
+(\hbar\omega)^2=(\hbar k)^2c^2+m_\Phi^2c^4.
+\]
+Al dividir por $\hbar^2$ obtenemos
+\begin{equation}
+\omega^2=c^2k^2+\frac{m_\Phi^2c^4}{\hbar^2}.
+\label{eq:dispersion-masiva}
+\end{equation}
+Cada término tiene dimensión de inversa de tiempo al cuadrado. Definimos
+\[
+\mu=\frac{m_\Phi c}{\hbar},\qquad [\mu]=\mathrm{m}^{-1},
+\]
+y la rama de frecuencia positiva se expresa como
+\[
+\omega_k=c\sqrt{k^2+\mu^2}.
+\]
+Para un $k$ dado, la dispersión determina qué frecuencia es compatible con
+el modelo. Si $\mu>0$, el cociente $\omega_k/|k|$ depende de $k$; los modos
+no comparten una única velocidad de fase. Si $\mu=0$, la rama positiva es
+$\omega_k=c|k|$. Compartir esta dispersión sin masa no identifica un campo
+escalar con el campo electromagnético.
+
+El uso de relaciones cuánticas motiva la dispersión que imponemos al modelo
+clásico. No supone que la energía total de una configuración clásica de
+amplitud arbitraria sea la de una única excitación cuántica.
+
+\section{Ecuación de Klein--Gordon}
+
+Buscamos ahora una ecuación diferencial cuyos modos reproduzcan
+\eqref{eq:dispersion-masiva}. Para ello consideramos el modo armónico del
+manuscrito,
+\[
+\Phi(x,t)=A\cos(kx-\omega t+\varphi),
+\]
+y calculamos sus derivadas. Con $\theta=kx-\omega t+\varphi$,
+\[
+\Phi_t=A\omega\sin\theta,\qquad
+\Phi_{tt}=-A\omega^2\cos\theta=-\omega^2\Phi,
+\]
+\[
+\Phi_x=-Ak\sin\theta,\qquad
+\Phi_{xx}=-Ak^2\cos\theta=-k^2\Phi.
+\]
+La segunda derivada devuelve el mismo coseno multiplicado por el cuadrado
+negativo de la frecuencia correspondiente. Este hecho sugiere cómo traducir
+la dispersión a un operador diferencial. En efecto,
+\[
+\frac1{c^2}\Phi_{tt}-\Phi_{xx}+\mu^2\Phi
+=\left(-\frac{\omega^2}{c^2}+k^2+\mu^2\right)\Phi=0.
+\]
+Así construimos la ecuación de Klein--Gordon en una dimensión:
+\begin{equation}
+\frac1{c^2}\Phi_{tt}-\Phi_{xx}+\mu^2\Phi=0.
+\label{eq:kg-plana-1d}
+\end{equation}
+Se trata de una elección local, lineal, de segundo orden y con coeficientes
+constantes, compatible con la dispersión. La igualdad obtenida para el modo
+muestra esa compatibilidad; no demuestra que una dispersión determine una
+única EDP entre todos los operadores posibles. La forma usual para un
+campo escalar real se recoge también en la literatura
+\cite[\S1.1.1, ecuación (1.12)]{TongQFT}; aquí se conserva la construcción
+modal del manuscrito y se mantienen visibles los factores de $c$ y $\hbar$.
+La comparación se hace con la ecuación por componentes de esa referencia,
+que emplea unidades naturales; la convención de signatura que utilizaremos
+se fija en el apartado~\ref{sec:notacion-unidades}.
+
+La linealidad tiene una consecuencia decisiva: si $\Phi_1$ y $\Phi_2$
+son soluciones, el operador aplicado a $a\Phi_1+b\Phi_2$ es
+$a\mathcal L\Phi_1+b\mathcal L\Phi_2=0$, para constantes $a,b$.
+Permite construir perfiles más generales por superposición. Una suma
+infinita o integral de Fourier requiere además convergencia suficiente
+para derivar término a término. Por ejemplo, la convergencia uniforme
+de la serie y de sus derivadas hasta orden dos permite obtener una solución
+clásica por este procedimiento.
+
+En tres dimensiones y con isotropía espacial, un modo
+$A\cos(\boldsymbol{k}\cdot\boldsymbol{x}-\omega t+\varphi)$ satisface
+\[
+\nabla^2\Phi=-(k_x^2+k_y^2+k_z^2)\Phi=-|\boldsymbol{k}|^2\Phi.
+\]
+La extensión de \eqref{eq:kg-plana-1d} es entonces
+\begin{equation}
+\frac1{c^2}\Phi_{tt}-\nabla^2\Phi+\mu^2\Phi=0,
+\label{eq:kg-plana-3d}
+\end{equation}
+con $\omega^2=c^2(|\boldsymbol{k}|^2+\mu^2)$. Los tres términos de la
+EDP tienen unidades de campo divididas por longitud al cuadrado.
+
+También puede comprobarse el paso operatorio usando
+$e^{i(kx-\omega t)}$: $i\partial_t$ devuelve $\omega$ y
+$-i\partial_x$ devuelve $k$. Sus cuadrados son $-\partial_t^2$ y
+$-\partial_x^2$, respectivamente.
+\footnote{En el bloque operatorio de la página 1 de \textit{Derivación de la
+ecuación de onda} aparece un factor $i$ adicional junto a la derivada
+espacial segunda. La corrección $(-i\partial_x)^2=-\partial_x^2$ es
+coherente con la ecuación de Klein--Gordon final del propio manuscrito.}
+En el capítulo siguiente utilizaremos la linealidad y la separación modal
+para construir un problema con solución exacta que permita comprobar el
+método numérico.
+
+\section{Notación, signatura y unidades}
+\label{sec:notacion-unidades}
+
+Mantenemos $y(t)$, $m$, $K$, $\omega_0$ y $\varphi$ en el desarrollo
+mecánico. El mismo símbolo $y(x,t)$ expresa la extensión espacial de los
+apuntes; $\Phi$ denota el campo relativista y $m_\Phi$ su masa física.
+El parámetro auxiliar $r$ de la ecuación característica no se utilizará
+fuera de su resolución; en Schwarzschild se indicará expresamente su
+uso como coordenada radial. Para evitar confundir la fase $\varphi$ con
+el azimut, este último se denotará $\phi_{\mathrm{az}}$.
+
+Con signatura $(-+++)$ y $t$ en segundos, el intervalo plano es
+$ds^2=-c^2dt^2+dx^2+dy^2+dz^2$, donde las letras espaciales son coordenadas,
+no desplazamientos del muelle. Definimos
+\[
+\Box=-c^{-2}\partial_t^2+\nabla^2.
+\]
+Multiplicar \eqref{eq:kg-plana-3d} por $-1$ da
+$(\Box-\mu^2)\Phi=0$. El signo del término de masa depende así de la
+convención usada para $\Box$, no de cambiar el modelo físico.
+
+Para pasar de SI a un problema adimensional elegimos una longitud
+$L_0>0$ y una escala de campo $\Phi_0>0$. Introducimos
+\[
+\widehat x=\frac{x}{L_0},\qquad \widehat t=\frac{ct}{L_0},\qquad
+\widehat\Phi=\frac{\Phi}{\Phi_0},\qquad \widehat\mu=\mu L_0.
+\]
+La regla de la cadena da
+$\partial_t=(c/L_0)\partial_{\widehat t}$ y
+$\partial_x=L_0^{-1}\partial_{\widehat x}$. Por tanto,
+\eqref{eq:kg-plana-1d} se transforma, tras dividir por $\Phi_0/L_0^2$, en
+\begin{equation}
+\widehat\Phi_{\widehat t\widehat t}
+-\widehat\Phi_{\widehat x\widehat x}
++\widehat\mu^2\widehat\Phi=0.
+\label{eq:kg-adimensional}
+\end{equation}
+Todos sus símbolos son adimensionales. Elegir como unidades de tiempo
+$L_0/c$ y de masa $\hbar/(cL_0)$ hace que los valores numéricos de $c$
+y $\hbar$ sean uno, y que la masa adimensional coincida con $\mu L_0$.
+Se trata de una elección de unidades, no de una igualdad entre magnitudes
+de dimensiones diferentes. $G$ no interviene en el problema plano; en
+Schwarzschild aparecerá la longitud $GM/c^2$, que permite formar el
+acoplamiento adimensional $GM\mu/c^2$.
+
+La tabla reúne los símbolos que se utilizarán en los modelos. Una amplitud
+lleva las unidades de su variable: longitud para el muelle y unidades de
+campo para $\Phi$. Los resultados numéricos planos se presentarán en las
+variables con sombrero definidas aquí.
+
+\small
+\begin{longtable}{@{}p{0.20\textwidth}p{0.49\textwidth}p{0.22\textwidth}@{}}
+\caption{Notación global y unidades de referencia.}\label{tab:notacion-global}\\
+\toprule
+Símbolo & Significado & Unidad SI o convención \\
+\midrule
+\endfirsthead
+\toprule
+Símbolo & Significado & Unidad SI o convención \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+$y(t)$ & Desplazamiento del oscilador & m \\
+$m$ & Masa mecánica del oscilador & kg \\
+$K$ & Constante elástica & $\mathrm{N\,m}^{-1}$ \\
+$\omega_0$ & Frecuencia angular propia del oscilador & $\mathrm{rad\,s}^{-1}$ \\
+$A$ & Amplitud & Como la variable oscilante \\
+$\varphi$ & Fase inicial & rad \\
+$y(x,t)$ & Perturbación mecánica espacial & Según variable elegida \\
+$\Phi$ & Campo escalar relativista & Normalización por fijar \\
+$m_\Phi$ & Masa física asociada al campo & kg \\
+$\mu=m_\Phi c/\hbar$ & Parámetro de masa del campo & $\mathrm{m}^{-1}$ \\
+$k$ & Número de onda en una dimensión & $\mathrm{m}^{-1}$ \\
+$\omega$, $\nu$ & Frecuencia angular y ordinaria & $\mathrm{rad\,s}^{-1}$; Hz \\
+$c$ & Velocidad de la luz en el vacío & $\mathrm{m\,s}^{-1}$ \\
+$\hbar$ & Constante de Planck reducida & $\mathrm{J\,s}$ \\
+$G$ & Constante gravitatoria & $\mathrm{m^3\,kg^{-1}\,s^{-2}}$ \\
+$M$ & Masa física del agujero negro & kg; conversión explícita si se geometriza \\
+$r$, $r_*$ & Radio de Schwarzschild y coordenada tortuga & m antes de reescalar \\
+$\ell$ & Número angular de los armónicos esféricos & Entero no negativo \\
+$\phi_{\mathrm{az}}$ & Ángulo azimutal, distinto de la fase & rad \\
+$\omega_R$, $\omega_I$ & Partes real e imaginaria de una frecuencia compleja & Inversa de tiempo \\
+$\tau$ & Tiempo de decaimiento de amplitud & Unidad temporal declarada \\
+\end{longtable}
+\normalsize
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{El fichero de estilo \texttt{GeM-UPM.cls}}\label{s:estilo}
-El fichero de estilo \texttt{GeM-UPM.cls} contiene todos los códigos e instrucciones que hacen que el documento, al compilar el fichero \texttt{main.tex}, se vea como es. En general, su manipulación requiere un conocimiento avanzado del lenguaje \LaTeX~  y no se recomienda modificarlo. 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{El paquete \texttt{minted}}\label{s:minted}
-
-A lo largo de este documento se ha hecho un uso frecuente del paquete \texttt{minted} para mencionar diversos comandos de \LaTeX, por lo que parece conveniente dedicar unos comentarios que expliquen brevemente su propósito y funcionamiento. El paquete  \texttt{minted} se usa para añadir el código fuente de múltiples lenguajes de programación a un texto. Este paquete no se carga de manera automática, sino que hay que indicarlo en el preámbulo del fichero como una opción de la plantilla. 
+La convención temporal para las futuras frecuencias complejas será
+$e^{-i\omega t}$, con $\omega=\omega_R+i\omega_I$. Como
+$e^{-i\omega t}=e^{-i\omega_Rt}e^{\omega_It}$, una parte imaginaria negativa
+representa decaimiento. El tiempo de caída de la amplitud por un factor $e$
+es $\tau=1/|\omega_I|$, en la unidad temporal elegida. Su determinación
+para Schwarzschild requerirá resolver el problema espectral correspondiente.

@@ -47,7 +47,7 @@ _minted*/
 .minted-*/
 *.minted
 
-# Generated report PDF; PDF figures remain under version control
+# Generated report PDF
 /report/main.pdf
 
 # Legacy copies and examples unused by the current report
@@ -64,3 +64,22 @@ _minted*/
 tmp/
 /results/raw/
 /results/tmp/
+
+# Local instructions and reference material; not part of the submission
+/AGENTS.md
+/docs/
+/report/COMPILACION.md
+
+# LaTeX recovery artifacts
+*-SAVE-ERROR
+
+# Regenerable traces and local PDF figures; version only the WebP images
+/results/flat/traces/
+/results/flat/figures/*.pdf
+
+# Regenerable numeric summaries; report reads the generated LaTeX tables
+/results/flat/dispersion.csv
+/results/flat/convergence.csv
+
+# Local execution metadata, regenerated with the simulations
+/results/flat/manifest.json

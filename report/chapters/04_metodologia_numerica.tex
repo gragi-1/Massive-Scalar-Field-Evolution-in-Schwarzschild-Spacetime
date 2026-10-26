@@ -1,0 +1,91 @@
+% !TEX root = ../main.tex
+\section{Cómo se calcula la evolución}
+\label{sec:metodo-plano}
+
+\subsection{Aproximar el campo y sus derivadas}
+El programa almacena el campo en $N$ posiciones igualmente separadas.
+La distancia entre dos posiciones consecutivas es $h=\widehat L/N$.
+Se almacena el extremo izquierdo y se omite la copia del extremo derecho,
+porque ambos representan el mismo punto del dominio periódico. Para
+calcular junto a un extremo se utiliza como vecino el punto correspondiente
+del extremo opuesto.
+
+La ecuación necesita una segunda derivada espacial, pero el programa
+dispone de valores en posiciones separadas. La aproximamos utilizando el
+valor de un punto y los de sus dos vecinos. Su origen se ve al desarrollar
+por Taylor una función suave $f$:
+\[
+\begin{aligned}
+f(x+h)&=f(x)+hf'(x)+\tfrac12h^2f''(x)+\cdots,\\
+f(x-h)&=f(x)-hf'(x)+\tfrac12h^2f''(x)+\cdots.
+\end{aligned}
+\]
+Al sumar, los términos de la primera derivada se cancelan. Despejar la
+segunda derivada conduce a
+\[
+f''(x)\simeq\frac{f(x+h)-2f(x)+f(x-h)}{h^2}.
+\]
+Esta fórmula compara el valor central con los de alrededor y aproxima
+cómo cambia la pendiente del perfil. Se llama diferencia centrada porque
+utiliza un vecino a cada lado. Para una función suficientemente suave,
+el primer error que queda después de la cancelación es proporcional a
+$h^2$ al hacer $h$ pequeño. En los perfiles sinusoidales utilizados se
+cumple esa regularidad.
+
+\subsection{Avanzar de un instante al siguiente}
+El tiempo también se divide en pasos de tamaño $\Delta\widehat t$.
+Escribimos $\Phi_i^n$ para el valor numérico del campo adimensional en
+la posición $i$ y en el instante $n\Delta\widehat t$. El subíndice $i$
+identifica una posición; el superíndice $n$ identifica un instante, no
+una potencia.
+
+Aproximamos la segunda derivada temporal del mismo modo, utilizando el
+instante anterior, el actual y el siguiente. Al sustituir ambas
+aproximaciones en Klein--Gordon y despejar el valor siguiente resulta
+\begin{equation}
+\begin{aligned}
+\Phi_i^{n+1}={}&2\Phi_i^n-\Phi_i^{n-1}\\
+&+(\Delta\widehat t)^2
+\left(\frac{\Phi_{i+1}^n-2\Phi_i^n+\Phi_{i-1}^n}{h^2}
+-\widehat\mu^2\Phi_i^n\right).
+\end{aligned}
+\label{eq:esquema-plano}
+\end{equation}
+La expresión entre paréntesis aproxima la segunda derivada temporal que
+predice la EDP. Así, cada paso utiliza el campo actual, sus vecinos y el
+campo del instante anterior. La regla es explícita: todos esos valores
+ya se conocen cuando se calcula el siguiente.
+
+Para empezar necesitamos dos instantes. El primero se fija con el perfil
+inicial. El segundo se aproxima mediante Taylor en el tiempo. Como la
+velocidad inicial es cero, el término lineal desaparece y queda
+\begin{equation}
+\Phi_i^1=\Phi_i^0+\frac{(\Delta\widehat t)^2}{2}
+\left(\frac{\Phi_{i+1}^0-2\Phi_i^0+\Phi_{i-1}^0}{h^2}
+-\widehat\mu^2\Phi_i^0\right).
+\label{eq:inicio-plano}
+\end{equation}
+Esto incorpora el cambio inicial que exige la ecuación aunque el campo
+parta con velocidad nula. A partir de esos dos instantes se repite
+\eqref{eq:esquema-plano} hasta el tiempo final.
+
+\subsection{Elección del paso y comprobación del error}
+El paso temporal debe elegirse junto con la separación espacial. Un paso
+demasiado grande puede hacer crecer errores del cálculo aunque la
+solución exacta permanezca acotada. Para este esquema periódico utilizamos
+la restricción de estabilidad
+\begin{equation}
+\Delta\widehat t<\frac{2}{\sqrt{\widehat\mu^2+4/h^2}}.
+\label{eq:estabilidad-plana}
+\end{equation}
+Es una condición del procedimiento numérico. En las ejecuciones se propone
+un paso igual a $0.8$ veces esa cota y se reduce ligeramente, si hace falta,
+para que un número entero de pasos termine exactamente en
+$\widehat t=20$. Al aumentar $N$ también disminuye el paso temporal.
+
+Las diferencias centradas aproximan ambas derivadas con errores de orden
+dos para soluciones suaves. Por ello esperamos que el error disminuya
+aproximadamente por un factor cuatro al reducir a la mitad los pasos
+espacial y temporal. Esta expectativa se contrasta con las cuatro mallas
+utilizadas; los resultados y el alcance de esa comprobación se explican
+a continuación.

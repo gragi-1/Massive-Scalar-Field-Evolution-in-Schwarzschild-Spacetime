@@ -1,0 +1,50 @@
+% !TEX root = ../main.tex
+\section{Código y reproducción de los experimentos}
+\label{sec:reproduccion-plana}
+
+La evolución plana está implementada en \texttt{src/flat\_klein\_gordon.py}
+y el protocolo en \texttt{src/run\_flat\_validation.py}. Se usa Python con
+NumPy, SciPy y Matplotlib. Las versiones directas se fijan en
+\texttt{requirements.txt}; la ejecución registra además la versión de Python,
+la configuración, el commit de base y las huellas SHA-256 de los dos archivos
+de código en \texttt{results/flat/manifest.json}. Las huellas identifican el
+contenido ejecutado aunque existan cambios locales sin commit.
+
+Desde la raíz del repositorio, en Windows:
+\begin{verbatim}
+python -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\python src\run_flat_validation.py
+.\report\compilar.ps1
+\end{verbatim}
+
+La actualización esencial del campo puede resumirse así:
+\begin{verbatim}
+U0 = cos(k*x)
+U1 = U0 + (dt**2/2) * (Dxx(U0) - mu**2*U0)
+para cada paso:
+    U2 = 2*U1 - U0 + dt**2*(Dxx(U1) - mu**2*U1)
+    comparar U2 con la solucion exacta
+    registrar la amplitud del modo y el error
+    U0, U1 = U1, U2
+\end{verbatim}
+
+En este pseudocódigo, \texttt{U0}, \texttt{U1} y \texttt{U2} son los campos
+en los instantes anterior, actual y siguiente. \texttt{Dxx} aplica la
+diferencia espacial centrada de la sección~\ref{sec:metodo-plano}. En esa función, los vecinos se toman con índices periódicos. El código
+elige el paso dentro de \eqref{eq:estabilidad-plana}, genera los CSV de
+trazas y tablas, y exporta las figuras en PDF y WebP. Las tablas LaTeX se
+escriben desde los mismos datos que los CSV; no se transcriben a mano.
+El protocolo se detiene si no se observa el orden modal esperado o si la
+señal no concuerda con la predicción de la recurrencia dentro de las tolerancias
+indicadas en el código. Estas comprobaciones se refieren al protocolo
+plano implementado y deben ampliarse al extender el modelo.
+
+Para medir la frecuencia, el programa obtiene primero una estimación
+mediante la transformada rápida de Fourier (\texttt{numpy.fft}), que
+identifica las frecuencias presentes en la señal. Esa estimación delimita
+la búsqueda de un coseno ajustado a los datos. La función de ajuste no
+recibe la frecuencia exacta. Además de las comparaciones presentadas en
+el capítulo 6, el código conserva comprobaciones internas frente a la
+frecuencia y la evolución que predice la regla discreta. Son controles
+de implementación; no sustituyen la comparación con la solución exacta.

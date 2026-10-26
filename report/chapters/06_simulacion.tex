@@ -1,0 +1,49 @@
+% !TEX root = ../main.tex
+\chapter{Simulación}
+\label{ch:simulacion}
+
+El problema plano del capítulo~\ref{ch:modelos-previos} permite comprobar
+el cálculo numérico antes de abordar Schwarzschild. Conocemos su solución
+exacta: podemos calcular el campo mediante un programa y medir cuánto se
+aparta de esa referencia. En este capítulo presentamos el procedimiento,
+los experimentos ejecutados y lo que permiten concluir.
+
+\section{Problema y pruebas realizadas}
+
+Utilizamos las variables adimensionales definidas en
+\eqref{eq:kg-adimensional}. Los sombreros recuerdan que hemos dividido las
+magnitudes físicas por sus escalas de referencia. La ecuación que resuelve
+el programa es
+\[
+\widehat\Phi_{\widehat t\widehat t}
+=\widehat\Phi_{\widehat x\widehat x}-\widehat\mu^2\widehat\Phi.
+\]
+Trabajamos en $0\le\widehat x<2\pi$, con $\widehat\mu=0.7$, amplitud
+inicial uno y tiempo final $\widehat t=20$. Para cada entero $j$ elegido,
+el perfil inicial y su velocidad son
+\[
+\widehat\Phi(\widehat x,0)=\cos(j\widehat x),\qquad
+\widehat\Phi_{\widehat t}(\widehat x,0)=0.
+\]
+El índice $j$ cuenta cuántas oscilaciones completas del coseno caben en el
+dominio. Se mantiene el contorno periódico del modelo previo: el extremo
+derecho se conecta con el izquierdo. Esta elección hace compatible el
+perfil con el dominio y permite utilizar la solución exacta; no representa
+las fronteras de un agujero negro.
+
+Se han realizado dos pruebas. En la primera se usan $256$ puntos y se
+varía $j=1,2,3,4$ para comprobar la relación entre número de onda y
+frecuencia. En la segunda se fija $j=2$ y se repite el cálculo con $64$,
+$128$, $256$ y $512$ puntos para comprobar cómo disminuye el error.
+El caso $j=2$ con $256$ puntos es común a ambas pruebas: en total son
+siete evoluciones distintas.
+
+Los parámetros son elecciones de validación, sin una masa física en SI
+seleccionada. Los datos, tablas y figuras de las siete ejecuciones se
+conservan en \texttt{results/flat/}; el apartado~\ref{sec:reproduccion-plana}
+explica cómo reproducirlos.
+
+\input{chapters/04_metodologia_numerica}
+\input{chapters/05_validacion_espacio_plano}
+\input{chapters/06_estados_cuasiligados}
+\input{chapters/07_resultados_discusion}

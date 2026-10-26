@@ -1,0 +1,126 @@
+% !TEX root = ../main.tex
+% Resultados de las siete ejecuciones identificadas en results/flat/manifest.json.
+\section{Qué muestran los resultados}
+\label{sec:validacion-plana}
+
+\subsection{Comparación con la solución exacta}
+Para los datos elegidos, la referencia del capítulo~\ref{ch:modelos-previos}
+se escribe
+\[
+\widehat\Phi_{\rm ex}(\widehat x,\widehat t)
+=\cos(j\widehat x)\cos(\widehat\omega_j\widehat t),\qquad
+\widehat\omega_j=\sqrt{j^2+\widehat\mu^2}.
+\]
+El programa calcula la evolución mediante la regla anterior y después
+la compara con esta expresión. La referencia exacta no se utiliza para
+rellenar los valores futuros de la malla.
+
+Para representar la oscilación en una gráfica, en cada instante se mide
+la amplitud del perfil espacial $\cos(j\widehat x)$ presente en el campo
+calculado. Para obtenerla se multiplican los valores del campo por ese
+coseno, se suman y se divide por la suma de los cuadrados del coseno.
+Esta normalización devuelve amplitud uno para el perfil inicial. En la
+solución exacta, la amplitud temporal así obtenida es
+$\cos(\widehat\omega_j\widehat t)$. Esta es la magnitud representada en
+la figura~\ref{fig:evolucion-plana}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../results/flat/figures/evolution.pdf}
+\caption{Amplitud temporal del modo $j=2$: solución exacta y cálculo con
+$N=256$, $\widehat\mu=0.7$ y amplitud inicial uno. El panel inferior
+muestra la diferencia entre ambas señales, que apenas se aprecia al
+comparar directamente las oscilaciones.}
+\label{fig:evolucion-plana}
+\end{figure}
+
+Las dos oscilaciones casi coinciden en la escala del panel superior.
+La diferencia del panel inferior muestra, sin embargo, un pequeño error
+que aumenta en la ventana estudiada: una frecuencia ligeramente distinta
+va desplazando los máximos y mínimos de la señal. La comparación visual
+se complementa por ello con las mediciones de frecuencia y de error.
+
+\subsection{Frecuencias y relación de dispersión}
+La frecuencia se mide a partir de la señal calculada. Se ajusta un coseno
+permitiendo variar su frecuencia, amplitud, fase y valor medio, hasta que
+reproduzca lo mejor posible los valores registrados. La frecuencia
+teórica no se proporciona al ajuste. Los detalles de implementación se
+identifican en el apartado~\ref{sec:reproduccion-plana}.
+
+La tabla~\ref{tab:dispersion-plana} compara el resultado con la predicción
+$\widehat\omega_j=\sqrt{j^2+0.7^2}$. El error relativo es la diferencia
+absoluta entre la frecuencia medida y la exacta, dividida por la exacta.
+Por ejemplo, para $j=2$ obtenemos $2.11892519$ frente a $2.11896201$:
+un error relativo de aproximadamente $0.00174$ por ciento.
+
+\begin{table}[htbp]
+\centering\small
+\input{../results/flat/dispersion_table.tex}
+\caption{Frecuencias adimensionales medidas para los cuatro perfiles,
+con $N=256$ y $0\le\widehat t\le20$. La última columna expresa el error
+relativo como fracción, sin multiplicar por cien.}
+\label{tab:dispersion-plana}
+\end{table}
+
+Los errores relativos de los cuatro casos van de $7.1\times10^{-6}$ a
+$1.25\times10^{-4}$. La figura~\ref{fig:dispersion-plana} muestra tanto
+el acuerdo con la relación de dispersión como el error que queda oculto
+cuando se superponen los valores exactos y los medidos. Para estos
+perfiles y esta resolución, el procedimiento recupera la relación entre
+frecuencia y número de onda con los errores cuantificados en la tabla.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../results/flat/figures/dispersion.pdf}
+\caption{Relación entre frecuencia y número de onda al cuadrado
+(izquierda), y error relativo de las frecuencias medidas (derecha).
+Todas las magnitudes son adimensionales; $\widehat k_j=j$ y
+$\widehat\mu=0.7$.}
+\label{fig:dispersion-plana}
+\end{figure}
+
+\subsection{Qué ocurre al utilizar más puntos}
+Además de medir frecuencias, comparamos el campo en todas las posiciones
+de la malla. En cada instante se resta el valor exacto al calculado en
+cada punto, se elevan esas diferencias al cuadrado, se suman con peso
+$h$ y se toma la raíz cuadrada:
+\[
+e_n=\left[h\sum_{i=0}^{N-1}
+\left(\Phi_i^n-
+\widehat\Phi_{\rm ex}(\widehat x_i,\widehat t_n)\right)^2\right]^{1/2}.
+\]
+Así obtenemos una medida conjunta del error espacial. El peso $h$ hace
+que la suma aproxime la integral del error al cuadrado y permite comparar
+mallas con distinto número de puntos. Es la norma $L^2$ discreta del
+error. La cifra de la tabla~\ref{tab:convergencia-plana} es el mayor valor
+de $e_n$ registrado durante cada evolución; no es un porcentaje.
+
+\begin{table}[htbp]
+\centering\small
+\input{../results/flat/convergence_table.tex}
+\caption{Error del modo $j=2$ al aumentar la resolución. El paso temporal
+y el campo están expresados en variables adimensionales. El orden compara
+el error de cada fila con el de la anterior.}
+\label{tab:convergencia-plana}
+\end{table}
+
+Al duplicar el número de puntos, la separación espacial se reduce a la
+mitad y el paso temporal también se reduce aproximadamente a la mitad.
+Si el error se divide por cuatro, decimos que el orden observado es dos.
+Los órdenes de la tabla, entre $2.000$ y $2.012$, son compatibles con ese
+comportamiento. Entre $N=64$ y $N=512$, el error máximo disminuye de
+aproximadamente $0.02108$ a $0.0003261$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{../results/flat/figures/convergence.pdf}
+\caption{Error máximo del campo frente a la separación espacial para
+$j=2$. Ambos ejes usan escala logarítmica para comparar las reducciones
+del error. La referencia discontinua corresponde a un error proporcional
+a $h^2$; se normaliza con la malla más fina y no es otra ejecución.}
+\label{fig:convergencia-plana}
+\end{figure}
+
+Esta prueba comprueba que el resultado mejora de forma regular con el
+refinamiento utilizado. Como se han reducido simultáneamente los pasos
+espacial y temporal, no permite atribuir por separado el error a cada uno.

@@ -372,7 +372,7 @@
         \end{hyphenrules}
         \vfill
 
-        \parbox[b]{\linewidth}{
+        \noindent\parbox[b]{\linewidth}{
             \large
             \newbox\advisors@box
             \setbox\advisors@box = \hbox{{\bfseries Dirigido por:}\ }
@@ -419,6 +419,7 @@
     \hrule
     \vspace*{\baselineskip}
     \par{\parindent=0pt
+        \raggedright
         Si deseas citar este trabajo, la entrada completa en \hologo{BibTeX} es la siguiente:
 
         \texttt{%
@@ -453,6 +454,7 @@
     \clearpage
     \thispagestyle{empty}
     \chapter*{Resumen}
+    \addcontentsline{toc}{chapter}{Resumen}
     \@abstractsp
 
     \textbf{Palabras clave}: \@keywordssp
@@ -518,14 +520,13 @@
 %\AtBeginDocument{%
 \AddToHook{begindocument/end}{
     \extrachapter
+    \frontmatter
     \maketitle% Título
     \makelicense% Licencia
     \makeresumen% Resumen
     \makeabstract% Resumen en inglés
 
     % Comienzo de los índices
-    \frontmatter
-
     \begingroup
         \parskip=0pt% Espaciado entre las líneas del índice
         \tableofcontents
