@@ -1,22 +1,34 @@
 % !TEX root = ../main.tex
-% Fuente: F00, apartados 1--3 y 10. Bibliografía pendiente de verificar.
 \chapter*{Introducción}
 \addcontentsline{toc}{chapter}{Introducción}
 \markboth{Introducción}{Introducción}
 \label{ch:introduccion}
 
-Esta memoria tiene como objetivo estudiar la evolución de un campo escalar
-masivo sobre una geometría fija de Schwarzschild. La primera validación
-del método numérico se ha realizado en espacio plano mediante modos con
-solución exacta. La etapa posterior comparará las frecuencias
-de estados cuasi-ligados obtenidas mediante evolución temporal y mediante
-un problema radial de autovalores complejos.
+El proyecto estudia un campo escalar masivo sobre la geometría exterior
+de un agujero negro de Schwarzschild. Esta entrega es parcial: reúne
+los fundamentos y la formulación radial alcanzados, junto con una
+validación numérica en espacio plano. La ecuación en Schwarzschild
+está deducida, pero su evolución temporal no se presenta como un
+resultado realizado.
 
-\pendiente{Completar esta introducción con la motivación documentada, una
-comparación sustantiva con bibliografía verificada, las aportaciones
-realmente realizadas y la organización definitiva del trabajo.}
+El desarrollo parte de un problema conocido, el oscilador armónico.
+Su solución introduce amplitud, fase, frecuencia y energía. Al añadir
+dependencia espacial y la relación de dispersión relativista se
+construye Klein--Gordon. En espacio plano se elige un perfil de coseno
+con solución exacta: así se puede comprobar qué calcula el programa,
+medir su error y estudiar la mejora al refinar la malla.
 
-\section*{Motivación y problema}
-\section*{Comparación con la literatura}
-\section*{Aportaciones del trabajo}
-\section*{Organización de la memoria}
+La segunda parte introduce la geometría necesaria para formular el
+campo en Schwarzschild. La métrica describe cómo se mide el intervalo;
+la conexión y la curvatura permiten obtener las ecuaciones del vacío.
+Con la separación angular y la coordenada tortuga se llega a una
+ecuación radial con potencial efectivo~\cite{TongGR,Barranco2011}.
+Esta parte es teórica y se distingue de las siete evoluciones planas
+efectivamente ejecutadas.
+
+Preliminares reúne los fundamentos. Modelos Previos formula la prueba
+plana y su solución exacta. Modelo Principal desarrolla la deducción en
+Schwarzschild. Simulación identifica cada ejecución, explica por qué
+el campo plano oscila sin perder amplitud y presenta las mediciones.
+Las conclusiones delimitan el avance y lo que queda pendiente; los
+anexos recogen el cálculo algebraico auxiliar y la reproducción.

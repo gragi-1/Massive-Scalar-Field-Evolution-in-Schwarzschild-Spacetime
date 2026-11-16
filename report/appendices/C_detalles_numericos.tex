@@ -6,9 +6,9 @@ La evolución plana está implementada en \texttt{src/flat\_klein\_gordon.py}
 y el protocolo en \texttt{src/run\_flat\_validation.py}. Se usa Python con
 NumPy, SciPy y Matplotlib. Las versiones directas se fijan en
 \texttt{requirements.txt}; la ejecución registra además la versión de Python,
-la configuración, el commit de base y las huellas SHA-256 de los dos archivos
-de código en \texttt{results/flat/manifest.json}. Las huellas identifican el
-contenido ejecutado aunque existan cambios locales sin commit.
+la configuración y la versión del código en
+\texttt{results/flat/manifest.json}. Estos datos permiten identificar
+las condiciones con las que se obtuvo cada resultado.
 
 Desde la raíz del repositorio, en Windows:
 \begin{verbatim}
@@ -48,3 +48,14 @@ recibe la frecuencia exacta. Además de las comparaciones presentadas en
 el capítulo 6, el código conserva comprobaciones internas frente a la
 frecuencia y la evolución que predice la regla discreta. Son controles
 de implementación; no sustituyen la comparación con la solución exacta.
+
+El mismo comando genera una figura de lectura de la onda estacionaria,
+una animación de uno de los siete casos y el esquema de coordenadas de
+Schwarzschild. La animación reconstruye el modo plano a partir de su
+amplitud modal registrada; no añade una octava evolución ni simula el
+campo en la geometría curva.
+
+La entrega parcial se prepara, después de compilar, con
+\begin{verbatim}
+.venv\Scripts\python src\prepare_submission.py
+\end{verbatim}

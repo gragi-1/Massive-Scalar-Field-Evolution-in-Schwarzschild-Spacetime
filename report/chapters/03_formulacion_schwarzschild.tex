@@ -1,47 +1,208 @@
 % !TEX root = ../main.tex
-% Fuente: F00, apartado 7. Referencias científicas y derivaciones pendientes.
 \chapter{Modelo Principal}
 \label{ch:modelo-principal}
 
-El sistema previsto es un campo escalar masivo sobre una geometría fija de
-Schwarzschild, bajo la aproximación de campo de prueba. El modelo no incluye
-la resolución conjunta de las ecuaciones de Einstein y Klein--Gordon con
-retroacción gravitatoria.
-
-\pendiente{Desarrollar y fundamentar la geometría, el operador curvo, la
-reducción radial y las condiciones espectrales. La tabla presenta notación
-provisional; no contiene parámetros de simulaciones ejecutadas.}
-
 \section{Sistema físico e hipótesis}
-\section{Geometría de Schwarzschild}
-\section{Klein--Gordon en espacio-tiempo curvo y separación angular}
-\section{Coordenada tortuga}
-\section{Ecuación radial reducida y potencial efectivo}
-\section{Estados cuasi-ligados, parámetros y observables}
-\label{sec:parametros-principal}
 
-\begin{table}[htbp]
+Estudiamos un campo escalar real, masivo y mínimamente acoplado sobre la
+geometría exterior de un agujero negro sin rotación ni carga. La geometría
+se supone esféricamente simétrica, estática, asintóticamente plana y con
+constante cosmológica nula. La aproximación de campo de prueba significa
+que la energía del campo es suficientemente pequeña para despreciar su
+retroacción. La ecuación del campo se formula sobre una métrica fija;
+la geometría no se recalcula al cambiar el campo. La amplitud puede reescalarse porque
+la ecuación del campo es lineal; no se ha fijado una amplitud física ni una masa de la perturbación.
+
+La deducción tiene dos partes. Primero se determina la geometría exterior
+a partir de las simetrías y las ecuaciones de Einstein en el vacío.
+Después se construye la ecuación del campo sobre esa geometría y se reduce
+a un problema radial~\cite{TongGR}. Einstein y Klein--Gordon son las leyes
+que se adoptan; la métrica, la coordenada tortuga y el potencial efectivo
+son consecuencias de esas leyes y de las hipótesis anteriores.
+
+\section{Geometría de Schwarzschild}
+
+Un cambio de coordenadas puede hacer variables las componentes de una
+métrica plana. Por eso unos símbolos de Christoffel no nulos no prueban
+que exista curvatura. Para derivar utilizamos la conexión de Levi-Civita,
+caracterizada por compatibilidad métrica y ausencia de torsión. Estas dos
+condiciones fijan
+\begin{equation}
+\Gamma^\lambda_{ab}=\frac12g^{\lambda d}
+ (\partial_a g_{bd}+\partial_b g_{ad}-\partial_d g_{ab}),\qquad
+\nabla_a V^b=\partial_a V^b+\Gamma^b_{ad}V^d.
+\label{eq:levi-civita}
+\end{equation}
+La corrección compensa la variación de la base. El conmutador de estas
+derivadas define el tensor de Riemann; su contracción es el tensor de
+Ricci. Fijamos la convención
+\[
+R^a{}_{bcd}=\partial_c\Gamma^a_{db}-\partial_d\Gamma^a_{cb}
+ +\Gamma^a_{ce}\Gamma^e_{db}-\Gamma^a_{de}\Gamma^e_{cb},
+\qquad R_{bd}=R^a{}_{bad}.
+\]
+En cuatro dimensiones, contraer las ecuaciones del vacío
+$R_{ab}-\tfrac12Rg_{ab}=0$ da $R=0$ y, por tanto, $R_{ab}=0$.
+Esto no exige que Riemann sea nulo: puede haber curvatura en una región
+sin materia que actúe como fuente de la métrica.
+
+Elegimos el radio areal $r$, de modo que las esferas tengan área $4\pi r^2$.
+Las simetrías permiten escribir en el exterior
+\[
+ds^2=-A(r)c^2dt^2+B(r)dr^2+r^2d\Omega_2^2,\qquad
+d\Omega_2^2=d\theta^2+\sin^2\theta\,d\phi_{\rm az}^2.
+\]
+El tiempo se normaliza mediante $A\to1$ en el infinito; también exigimos
+$B\to1$. Con $P=A'/A$ y $Q=B'/B$, la sustitución de
+\eqref{eq:levi-civita} en Ricci proporciona
+\begin{equation}
+\frac{R_{tt}}{Ac^2}+\frac{R_{rr}}{B}=\frac{P+Q}{Br},\qquad
+R_{\theta\theta}=1-\frac1B+\frac{r}{2B}(Q-P).
+\label{eq:ricci-estatico}
+\end{equation}
+El anexo~\ref{sec:anexo-geometria} da las componentes que permiten
+reproducir este paso. La primera igualdad, en vacío, implica
+$(\log AB)'=0$. El comportamiento asintótico fija $AB=1$.
+La segunda se reduce entonces a $1-A-rA'=0$, por lo que
+$(rA)'=1$ y $A=1+C/r$. En el límite débil y para movimiento lento,
+la ecuación geodésica da $d^2r/dt^2\simeq-c^2A'/2$.
+Igualarla a $-GM/r^2$ fija $C=-2GM/c^2$. Obtenemos
+\begin{equation}
+ds^2=-f(r)c^2dt^2+\frac{dr^2}{f(r)}+r^2d\Omega_2^2,\qquad
+f(r)=1-\frac{r_s}{r},\qquad r_s=\frac{2GM}{c^2}.
+\label{eq:metrica-schwarzschild}
+\end{equation}
+Trabajamos en la región exterior $r>r_s$. El radio $r_s$ localiza el
+horizonte; la ecuación que se formula a continuación utiliza estas
+coordenadas exteriores.
+
+
+
+\section{Klein--Gordon en espacio-tiempo curvo y separación angular}
+
+Para un escalar, $\nabla_a\Phi=\partial_a\Phi$, pero la segunda derivada
+actúa sobre un covector y contiene la conexión. El acoplamiento mínimo
+mantiene el término de masa y reemplaza el operador plano por
+\begin{equation}
+(\Box_g-\mu^2)\Phi=0,\qquad
+\Box_g\Phi=\frac{1}{\sqrt{-g}}\partial_a
+ \bigl(\sqrt{-g}\,g^{ab}\partial_b\Phi\bigr),\qquad
+\mu=\frac{m_\Phi c}{\hbar}.
+\label{eq:kg-curva}
+\end{equation}
+Con $t$ en segundos, $g=-c^2r^4\sin^2\theta$. La ecuación queda
+\begin{equation}
+-\frac{\Phi_{tt}}{fc^2}
++\frac1{r^2}\partial_r(r^2f\Phi_r)
++\frac1{r^2}\Delta_{S^2}\Phi-\mu^2\Phi=0.
+\label{eq:kg-schwarzschild-sin-separar}
+\end{equation}
+El signo temporal procede de la signatura $(-+++)$, no de una elección
+del signo de la masa. Esta expresión concuerda con el modelo de campo
+de prueba de~\cite{Barranco2011}.
+
+La simetría esférica del fondo permite separar sectores angulares; no
+obliga a restringir el campo a $\ell=0$. Utilizamos armónicos complejos
+ortonormales con fase de Condon--Shortley,
+$\int Y_{\ell m}\overline{Y_{\ell' m'}}\,d\Omega
+=\delta_{\ell\ell'}\delta_{mm'}$ y
+$\Delta_{S^2}Y_{\ell m}=-\ell(\ell+1)Y_{\ell m}$.
+Para un sector escribimos
+\[
+\Phi=\frac{\psi(t,r)}{r}Y_{\ell m}(\theta,\phi_{\rm az}).
+\]
+El entero $\ell\ge0$ identifica la dependencia angular y
+$-\ell\le m\le\ell$. Para $\ell=0$ el armónico es constante: el campo
+tiene el mismo valor en todas las direcciones a radio fijo. El factor
+angular permite reducir la ecuación a las variables $t$ y $r$; esta
+separación es una herramienta de la formulación, no una simulación ya
+realizada. El azimut $\phi_{\rm az}$ se distingue de la fase $\varphi$
+utilizada en el oscilador.
+
+El factor $1/r$ simplifica la derivada radial, pues
+$\partial_r(r^2f\partial_r(\psi/r))
+=f'(r\psi_r-\psi)+fr\psi_{rr}$. Tras sustituir y multiplicar por $r$,
+\begin{equation}
+-\frac{\psi_{tt}}{fc^2}+f\psi_{rr}+f'\psi_r
+-\left[\mu^2+\frac{\ell(\ell+1)}{r^2}+\frac{f'}r\right]\psi=0.
+\label{eq:radial-antes-tortuga}
+\end{equation}
+
+\section{Coordenada tortuga}
+
+Para una trayectoria radial de luz, $ds^2=d\Omega_2^2=0$ da
+$dr/dt=\pm cf$. Buscamos una coordenada cuya velocidad radial sea
+$dr_*/dt=\pm c$. La regla de la cadena exige
+\[
+\frac{dr_*}{dr}=\frac1f=1+\frac{r_s}{r-r_s}.
+\]
+Al integrar y fijar una constante aditiva obtenemos
+\begin{equation}
+r_*=r+r_s\log\left(\frac r{r_s}-1\right).
+\label{eq:tortuga}
+\end{equation}
+Así, el horizonte corresponde a $r_*\to-\infty$ y el infinito a
+$r_*\to+\infty$. La transformación simplifica la propagación y permite
+tratar ambos extremos como regiones asintóticas. Una frontera numérica
+a valor finito de $r_*$ sigue siendo una aproximación al horizonte.
+
+\begin{figure}[htbp]
 \centering
-\small
+\includegraphics[width=\textwidth]{figures/schwarzschild_coordinates.pdf}
+\caption[Radio areal y coordenada tortuga.]{Esquema de la región exterior
+y de la relación entre el radio areal y la coordenada tortuga. Se trata
+de una representación de las coordenadas, no de una evolución simulada
+del campo. Los ejes del panel derecho se expresan en unidades de $r_s$.}
+\label{fig:coordenadas-schwarzschild}
+\end{figure}
+
+\section{Ecuación radial reducida y potencial efectivo}
+
+Como $\partial_{r_*}=f\partial_r$, resulta
+$\psi_{r_*r_*}=f^2\psi_{rr}+ff'\psi_r$. Multiplicar
+\eqref{eq:radial-antes-tortuga} por $-fc^2$ proporciona
+\begin{equation}
+\psi_{tt}-c^2\psi_{r_*r_*}+c^2V_\ell(r)\psi=0,\qquad
+V_\ell=f\left[\mu^2+\frac{\ell(\ell+1)}{r^2}+\frac{r_s}{r^3}\right].
+\label{eq:radial-schwarzschild}
+\end{equation}
+Los tres términos entre corchetes son la masa, la contribución angular
+y la corrección de curvatura~\cite{Barranco2011,Barranco2012}.
+Todos tienen dimensión de inversa de longitud al cuadrado. Se cumple
+$V_\ell\to0$ hacia el horizonte y $V_\ell\to\mu^2$ en el infinito.
+Si se toma $r_s\to0$ manteniendo $r$ y $\mu$ físicos, se recupera el
+potencial radial plano $\mu^2+\ell(\ell+1)/r^2$. Solo para $\ell=0$
+queda la ecuación unidimensional plana sin término centrífugo.
+
+La ecuación describe un campo distribuido en el exterior. El valor de
+$\psi$ no es la posición de una partícula ni una órbita: al dividirlo
+por $r$ y multiplicarlo por el armónico se recupera el campo $\Phi$.
+La derivación termina en esta ecuación radial y su potencial. Para
+obtener una evolución concreta faltan datos iniciales, un dominio,
+condiciones de contorno y su comprobación numérica.
+
+\section{Parámetros y alcance de la formulación}
+\label{sec:parametros-principal}
+\begin{table}[!htbp]
+\centering\footnotesize
 \begin{tabularx}{\textwidth}{@{}lXlX@{}}
 \toprule
-Símbolo & Magnitud y significado & Unidad SI & Valor o estado \\
+Símbolo & Significado & Unidad SI & Estado en esta entrega \\
 \midrule
-$M$ & Masa física del agujero negro & kg & Por fijar \\
-$m_\Phi$ & Masa física asociada al campo & kg & Por fijar \\
-$\mu$ & Parámetro $m_\Phi c/\hbar$ & $\mathrm{m}^{-1}$ & Por fijar \\
-$r$, $r_*$ & Radio y coordenada tortuga & m & Dominio por fijar \\
-$\ell$ & Número angular esférico & $1$ & Entero no negativo; por fijar \\
-$\omega_R$, $\omega_I$ & Partes de la frecuencia compleja & $\mathrm{s}^{-1}$ & No calculadas \\
-$\tau$ & Tiempo de decaimiento de la amplitud & s & No calculado \\
+$M$ & Masa del agujero negro & kg & Sin valor seleccionado \\
+$m_\Phi$ & Masa asociada al campo & kg & Sin valor seleccionado \\
+$\mu$ & Parámetro $m_\Phi c/\hbar$ & $\mathrm{m}^{-1}$ & Se mantiene simbólico \\
+$r_s$ & Radio $2GM/c^2$ & m & Escala del horizonte \\
+$r$, $r_*$ & Radio areal y coordenada tortuga & m & Definidos en la formulación \\
+$\ell$, $m$ & Índices angulares & $1$ & Sin sector numérico elegido \\
+$V_\ell$ & Potencial de la ecuación radial & $\mathrm{m}^{-2}$ & Expresión deducida \\
 \bottomrule
 \end{tabularx}
-\caption{Parámetros y observables previstos del modelo principal. Las
-unidades se expresan en SI antes de cualquier cambio de escala.}
+\caption[Parámetros de la formulación en Schwarzschild.]{Magnitudes de Schwarzschild. No se han seleccionado valores numéricos.}
 \label{tab:parametros-principal}
 \end{table}
 
-Cuando se introduzcan unidades geometrizadas, deberá explicitarse la
-conversión de la masa $M$. Con $M$ en kilogramos y $\mu$ en inversa de metro,
-la combinación adimensional correspondiente es $GM\mu/c^2$; escribir $M\mu$
-requiere haber declarado previamente la conversión de $M$ a longitud.
+En esta entrega se presenta la deducción del modelo, mientras que las
+simulaciones del capítulo siguiente corresponden exclusivamente a
+espacio plano. Su validación comprueba el método de partida; todavía
+no comprueba la evolución sobre Schwarzschild.

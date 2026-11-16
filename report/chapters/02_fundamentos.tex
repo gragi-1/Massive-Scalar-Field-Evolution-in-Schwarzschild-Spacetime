@@ -1,5 +1,4 @@
 % !TEX root = ../main.tex
-% Base principal elegida por el usuario: F02a p. 1. Energía: F02b p. 2.
 \chapter{Preliminares}
 \label{ch:preliminares}
 
@@ -9,11 +8,8 @@ resolverse por completo: una masa unida a un muelle. Su estudio permite
 introducir la frecuencia, la amplitud y la fase antes de incorporar una
 variable espacial. A continuación, las relaciones cuánticas y relativistas
 proporcionan una dispersión que servirá para construir Klein--Gordon.
-El desarrollo sigue el recorrido del manuscrito
-\textit{Derivación de la ecuación de onda} \cite[p.~1]{ApuntesOnda};
-la deducción de la energía se apoya en el segundo manuscrito
-\cite[p.~2]{ApuntesOscilador}. Cada paso distingue las leyes físicas
-adoptadas de las consecuencias matemáticas y de las hipótesis del modelo.
+En cada paso se distinguen las leyes físicas adoptadas, las hipótesis
+del modelo y las consecuencias que se deducen de ellas.
 
 \section{Oscilador armónico: ecuación y datos iniciales}
 \label{sec:oscilador}
@@ -46,7 +42,7 @@ los movimientos que parten de otros datos.
 \subsection{Resolución mediante la ecuación característica}
 La ecuación tiene coeficientes constantes y es lineal. Una exponencial
 es adecuada como solución de prueba porque sus derivadas son proporcionales
-a la propia función. Siguiendo el manuscrito, proponemos $y(t)=e^{rt}$,
+a la propia función. Proponemos $y(t)=e^{rt}$,
 con $r\in\mathbb C$ como parámetro auxiliar. Entonces
 \[
 \dot y=re^{rt},\qquad \ddot y=r^2e^{rt},
@@ -163,9 +159,8 @@ interpretación de frecuencia y fase se mantendrá al introducir ondas.
 
 \section{Conservación de energía y potencial elástico}
 
-La conexión con la energía se obtiene de la ecuación del movimiento,
-siguiendo el procedimiento de la página 2 de CamScanner
-\cite{ApuntesOscilador}. Multiplicamos $m\ddot y=-Ky$ por $\dot y$:
+Para obtener la energía conservada partimos de la ecuación del
+movimiento. Multiplicamos $m\ddot y=-Ky$ por $\dot y$:
 \[
 m\ddot y\,\dot y=-Ky\,\dot y.
 \]
@@ -193,11 +188,6 @@ V(y)=\frac12Ky^2,
 \]
 con el origen de energía elegido en $y=0$. Tanto $m\dot y^2$ como $Ky^2$
 tienen dimensión de energía, $\mathrm{kg\,m^2\,s^{-2}}$.
-\footnote{La página 2 del manuscrito usa $q$ en lugar de $y$. En dos sumas
-omite el cuadrado del desplazamiento en el término elástico, aunque la
-identificación final de $V(q)=Kq^2/2$ es correcta. Se restituye el cuadrado
-sin cambiar el razonamiento; aquí se mantiene la notación $y$ del manuscrito
-principal.}
 La conservación expresa un intercambio entre energía cinética y potencial;
 la ausencia de rozamiento es esencial para que la suma permanezca constante.
 
@@ -214,9 +204,9 @@ de la oscilación se encuentra el sistema en el instante inicial.
 \section{Dependencia espacial y modos armónicos}
 
 Hasta ahora $y$ dependía únicamente del tiempo. Para introducir una
-coordenada espacial, el manuscrito considera una fila de puntos separados
-por una distancia $a>0$: $x_n=na$, con $n=0,1,2,\ldots$
-\cite[p.~1, columna izquierda]{ApuntesOnda}. Supongamos que el primero
+coordenada espacial, consideramos una fila de puntos separados
+por una distancia $a>0$: $x_n=na$, con $n=0,1,2,\ldots$.
+Supongamos que el primero
 oscila como $y_0(t)=A\cos(\omega t)$ y que cada punto reproduce la misma
 oscilación con un retraso de fase $\delta$ respecto del anterior. Entonces
 \[
@@ -271,12 +261,12 @@ Un campo escalar asigna un valor a cada punto y a cada instante. En una
 dimensión escribimos $\Phi(x,t)$; en tres, $\Phi(\boldsymbol{x},t)$.
 Esta variable describe una configuración distribuida, no la trayectoria
 de una masa puntual. Reservamos $\varphi$ para la fase y usamos $\Phi$
-para el campo, que en el manuscrito también se representa con una phi.
+para el campo.
 Al introducir la masa del campo usaremos $m_\Phi$, para distinguirla de
 la masa $m$ del muelle sin alterar la notación de la derivación mecánica.
 
 La dispersión relativista se obtiene incorporando tres fundamentos físicos
-independientes del oscilador \cite[p.~1, columna derecha]{ApuntesOnda}.
+independientes del oscilador.
 La relación energía--frecuencia es $E=h\nu=\hbar\omega$, donde $h$ es la
 constante de Planck y $\hbar=h/(2\pi)$. La relación de de Broglie es
 $p=h/\lambda=\hbar k$ para un modo propagándose en la dirección positiva;
@@ -318,8 +308,7 @@ amplitud arbitraria sea la de una única excitación cuántica.
 \section{Ecuación de Klein--Gordon}
 
 Buscamos ahora una ecuación diferencial cuyos modos reproduzcan
-\eqref{eq:dispersion-masiva}. Para ello consideramos el modo armónico del
-manuscrito,
+\eqref{eq:dispersion-masiva}. Para ello consideramos un modo armónico,
 \[
 \Phi(x,t)=A\cos(kx-\omega t+\varphi),
 \]
@@ -350,7 +339,7 @@ muestra esa compatibilidad; no demuestra que una dispersión determine una
 única EDP entre todos los operadores posibles. La forma usual para un
 campo escalar real se recoge también en la literatura
 \cite[\S1.1.1, ecuación (1.12)]{TongQFT}; aquí se conserva la construcción
-modal del manuscrito y se mantienen visibles los factores de $c$ y $\hbar$.
+mediante modos y se mantienen visibles los factores de $c$ y $\hbar$.
 La comparación se hace con la ecuación por componentes de esa referencia,
 que emplea unidades naturales; la convención de signatura que utilizaremos
 se fija en el apartado~\ref{sec:notacion-unidades}.
@@ -381,10 +370,6 @@ También puede comprobarse el paso operatorio usando
 $e^{i(kx-\omega t)}$: $i\partial_t$ devuelve $\omega$ y
 $-i\partial_x$ devuelve $k$. Sus cuadrados son $-\partial_t^2$ y
 $-\partial_x^2$, respectivamente.
-\footnote{En el bloque operatorio de la página 1 de \textit{Derivación de la
-ecuación de onda} aparece un factor $i$ adicional junto a la derivada
-espacial segunda. La corrección $(-i\partial_x)^2=-\partial_x^2$ es
-coherente con la ecuación de Klein--Gordon final del propio manuscrito.}
 En el capítulo siguiente utilizaremos la linealidad y la separación modal
 para construir un problema con solución exacta que permita comprobar el
 método numérico.
@@ -393,8 +378,7 @@ método numérico.
 \label{sec:notacion-unidades}
 
 Mantenemos $y(t)$, $m$, $K$, $\omega_0$ y $\varphi$ en el desarrollo
-mecánico. El mismo símbolo $y(x,t)$ expresa la extensión espacial de los
-apuntes; $\Phi$ denota el campo relativista y $m_\Phi$ su masa física.
+mecánico. El símbolo $y(x,t)$ expresa una perturbación mecánica distribuida; $\Phi$ denota el campo relativista y $m_\Phi$ su masa física.
 El parámetro auxiliar $r$ de la ecuación característica no se utilizará
 fuera de su resolución; en Schwarzschild se indicará expresamente su
 uso como coordenada radial. Para evitar confundir la fase $\varphi$ con
@@ -468,18 +452,14 @@ $c$ & Velocidad de la luz en el vacío & $\mathrm{m\,s}^{-1}$ \\
 $\hbar$ & Constante de Planck reducida & $\mathrm{J\,s}$ \\
 $G$ & Constante gravitatoria & $\mathrm{m^3\,kg^{-1}\,s^{-2}}$ \\
 $M$ & Masa física del agujero negro & kg; conversión explícita si se geometriza \\
-$r$, $r_*$ & Radio de Schwarzschild y coordenada tortuga & m antes de reescalar \\
+$r$, $r_*$ & Radio areal y coordenada tortuga & m antes de reescalar \\
 $\ell$ & Número angular de los armónicos esféricos & Entero no negativo \\
 $\phi_{\mathrm{az}}$ & Ángulo azimutal, distinto de la fase & rad \\
-$\omega_R$, $\omega_I$ & Partes real e imaginaria de una frecuencia compleja & Inversa de tiempo \\
-$\tau$ & Tiempo de decaimiento de amplitud & Unidad temporal declarada \\
 \end{longtable}
 \normalsize
 
 
-La convención temporal para las futuras frecuencias complejas será
-$e^{-i\omega t}$, con $\omega=\omega_R+i\omega_I$. Como
-$e^{-i\omega t}=e^{-i\omega_Rt}e^{\omega_It}$, una parte imaginaria negativa
-representa decaimiento. El tiempo de caída de la amplitud por un factor $e$
-es $\tau=1/|\omega_I|$, en la unidad temporal elegida. Su determinación
-para Schwarzschild requerirá resolver el problema espectral correspondiente.
+En las pruebas planas, la frecuencia es real y positiva. Su papel es
+determinar la rapidez de la oscilación; no introduce por sí misma una
+pérdida de amplitud. El dominio y el contorno elegidos al resolver la
+EDP son esenciales para interpretar esa evolución.

@@ -153,9 +153,14 @@ def main():
     save_figure(fig, "convergence")
 
     source_hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                     for p in [ROOT/"src/flat_klein_gordon.py", Path(__file__)]}
-    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT,
-                                       text=True).strip()
+                     for p in [ROOT/"src/flat_klein_gordon.py", Path(__file__),
+                               ROOT/"src/plot_project_progress.py"]}
+    try:
+        revision = subprocess.check_output(
+            ["git", "-c", f"safe.directory={ROOT.as_posix()}", "rev-parse", "HEAD"],
+            cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
+    except (OSError, subprocess.CalledProcessError):
+        revision = None  # A distributed source archive need not contain .git.
     manifest = {"run_utc": datetime.now(timezone.utc).isoformat(),
                 "configuration": CONFIG, "python": sys.version,
                 "platform": platform.platform(),
@@ -179,6 +184,8 @@ def main():
                       "max_modal_recurrence_error": manifest["maximum_modal_recurrence_error"],
                       "dispersion": [{"j": r["j"], "relative_error": r["frequency_relative_error"]}
                                      for r in dispersion]}, indent=2))
+    from plot_project_progress import create_visuals
+    create_visuals(CONFIG)
 
 
 if __name__ == "__main__":

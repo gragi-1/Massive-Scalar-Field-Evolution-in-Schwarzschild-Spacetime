@@ -83,3 +83,10 @@ tmp/
 
 # Local execution metadata, regenerated with the simulations
 /results/flat/manifest.json
+
+# Generated explanatory figures and flat-run animation
+/report/figures/schwarzschild_coordinates.pdf
+/results/flat/field_evolution.gif
+
+# Local package prepared for a partial submission
+/partial-submission/

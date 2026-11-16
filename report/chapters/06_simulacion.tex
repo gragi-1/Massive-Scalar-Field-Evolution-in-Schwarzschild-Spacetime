@@ -43,7 +43,53 @@ seleccionada. Los datos, tablas y figuras de las siete ejecuciones se
 conservan en \texttt{results/flat/}; el apartado~\ref{sec:reproduccion-plana}
 explica cómo reproducirlos.
 
+\begin{table}[htbp]
+\centering\small
+\input{../results/flat/run_inventory.tex}
+\caption{Las siete ejecuciones distintas. El caso de 256 puntos con
+$j=2$ participa en ambas comprobaciones. Todas usan los mismos datos
+comunes descritos arriba.}
+\label{tab:ejecuciones-planas}
+\end{table}
+
+\section{Qué oscila y por qué no decae en estas pruebas}
+Lo que calcula el programa es el valor de un campo en cada punto del
+intervalo. Para el perfil elegido, la dependencia espacial sigue siendo
+$\cos(j\widehat x)$ y cambia su factor temporal $a_j(\widehat t)$.
+Al sustituir en la EDP resulta
+\[
+a_j''+(j^2+\widehat\mu^2)a_j=0,\qquad a_j(0)=1,\quad a_j'(0)=0.
+\]
+Es un oscilador: si $a_j$ es positiva, su aceleración es negativa;
+cuando cambia de signo, la aceleración cambia también. Por eso la
+velocidad inicial nula no mantiene el campo inmóvil. La frecuencia
+es $\widehat\omega_j=\sqrt{j^2+\widehat\mu^2}$.
+
+La solución $a_j=\cos(\widehat\omega_j\widehat t)$ tiene máximos de
+tamaño uno y mínimos de tamaño menos uno. Su valor instantáneo cambia,
+pero su envolvente no disminuye. La masa aporta un término restaurador;
+no es un término de rozamiento. Además, la periodicidad conecta ambos
+extremos y cancela el flujo neto. Por ello no debe aparecer decaimiento
+físico en esta prueba. Una pérdida sistemática de amplitud exigiría
+revisar el método o cambiar el modelo que se resuelve.
+
+Cuando el campo pasa por cero su derivada temporal puede ser grande.
+La energía no depende solo del campo: incluye esa derivada y el
+gradiente espacial. Por tanto, campo nulo en un instante y energía
+nula no son la misma afirmación.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../results/flat/figures/field_explained.pdf}
+\caption[Cómo interpretar la onda estacionaria plana.]{Una de las siete
+ejecuciones: $N=256$, $j=2$. Arriba se reconstruye el perfil con la
+amplitud modal calculada en cuatro instantes; abajo se muestra la señal
+registrada. Las líneas de nivel $\pm1$ hacen visible la envolvente
+constante. Es una onda estacionaria plana, no un campo evolucionado
+alrededor de un agujero negro.}
+\label{fig:interpretacion-campo-plano}
+\end{figure}
+
 \input{chapters/04_metodologia_numerica}
 \input{chapters/05_validacion_espacio_plano}
-\input{chapters/06_estados_cuasiligados}
 \input{chapters/07_resultados_discusion}
